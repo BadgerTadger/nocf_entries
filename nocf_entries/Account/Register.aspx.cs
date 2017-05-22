@@ -15,11 +15,10 @@ namespace nocf_entries.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser() { UserName = Email.Text, Email = Email.Text };
+            var user = new ApplicationUser() { UserName = UserName.Text, Email = Email.Text };
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
             {
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 string code = manager.GenerateEmailConfirmationToken(user.Id);
                 string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                 SendEmail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
@@ -40,10 +39,14 @@ namespace nocf_entries.Account
             message.From = new MailAddress("noreply@nocf.co.uk");
             message.Subject = subject;
             message.Body = body;
+            message.IsBodyHtml = true;
 
             try
             {
-                SmtpClient mailClient = new SmtpClient("relay-hosting.secureserver.net");
+                //SmtpClient mailClient = new SmtpClient("relay-hosting.secureserver.net");  //On Godaddy Server
+                SmtpClient mailClient = new SmtpClient("smtpout.europe.secureserver.net", 80); //Local Server
+
+                mailClient.Credentials = new System.Net.NetworkCredential("info@nocf.co.uk", "nocfemail14");
                 mailClient.Send(message);
 
             }

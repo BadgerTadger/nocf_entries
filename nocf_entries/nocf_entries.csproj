@@ -161,6 +161,7 @@
     <Content Include="Account\Lockout.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Manage.aspx" />
+    <Content Include="Account\ManageEmail.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
@@ -179,6 +180,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Manage\Owner.aspx" />
+    <Content Include="Manage\Web.config" />
     <None Include="Properties\PublishProfiles\entries.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -271,6 +274,13 @@
     <Compile Include="Account\Manage.aspx.designer.cs">
       <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\ManageEmail.aspx.cs">
+      <DependentUpon>ManageEmail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ManageEmail.aspx.designer.cs">
+      <DependentUpon>ManageEmail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\ManageLogins.aspx.cs">
       <DependentUpon>ManageLogins.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -361,6 +371,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Owner.aspx.cs">
+      <DependentUpon>Owner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\Owner.aspx.designer.cs">
+      <DependentUpon>Owner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

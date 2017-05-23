@@ -26,11 +26,20 @@ namespace nocf_entries.Account
                 var result = manager.ConfirmEmail(userId, code);
                 if (result.Succeeded)
                 {
-                    successPanel.Visible = true;
+                    if (User == null)
+                    {
+                        successLoggedOutPanel.Visible = true;
+                        successLoggedInPanel.Visible = false;
+                    }
+                    else
+                    {
+                        successLoggedOutPanel.Visible = false;
+                        successLoggedInPanel.Visible = true;
+                    }
                     return;
                 }
             }
-            successPanel.Visible = false;
+            successLoggedOutPanel.Visible = false;
             errorPanel.Visible = true;
         }
     }

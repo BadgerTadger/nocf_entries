@@ -10,51 +10,42 @@
 namespace nocf_entries.Account {
     
     
-    public partial class Confirm {
+    public partial class ManageEmail {
         
         /// <summary>
-        /// successLoggedOutPanel control.
+        /// ErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder successLoggedOutPanel;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// login control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink login;
+        protected global::System.Web.UI.WebControls.TextBox Email;
         
         /// <summary>
-        /// successLoggedInPanel control.
+        /// NewEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder successLoggedInPanel;
+        protected global::System.Web.UI.WebControls.TextBox NewEmail;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// ConfirmEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
-        
-        /// <summary>
-        /// errorPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder errorPanel;
+        protected global::System.Web.UI.WebControls.TextBox ConfirmEmail;
     }
 }

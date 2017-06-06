@@ -1,16 +1,16 @@
 ﻿<%@ Page Title="Personal Information" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="PersonalInfo.aspx.cs" Inherits="nocf_entries.Manage.PersonalInfo" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-<script type="text/javascript">
-    function PhoneValidator_ClientValidate(source, args) {
-        if (document.getElementById("<%= txtPhone.ClientID %>").value == "" &&
+    <script type="text/javascript">
+        function PhoneValidator_ClientValidate(source, args) {
+            if (document.getElementById("<%= txtPhone.ClientID %>").value == "" &&
             document.getElementById("<%= txtMobile.ClientID %>").value == "") {
-            args.IsValid = false;
+                args.IsValid = false;
+            }
+            else {
+                args.IsValid = true;
+            }
         }
-        else {
-            args.IsValid = true;
-        }
-    }
     </script>
 
     <h2><%: Title %>.</h2>
@@ -28,9 +28,9 @@
     </p>
     <asp:PlaceHolder runat="server" ID="phView" Visible="false">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <div class="form-horizontal">
-                    <h4>View your details</h4>
+                    <h4>Your details</h4>
                     <hr />
                     <dl class="dl-horizontal">
                         <dt>Name:</dt>
@@ -64,12 +64,23 @@
                         </dd>
                     </dl>
                 </div>
+                <div class="center-div">
+                    <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit Your Details" OnClick="btnEdit_Click" />
+                </div>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-5">
+                <div class="form-horizontal">
+                    <h4>Your dogs</h4>
+                    <hr />
+                </div>
+                <div>
+                    <asp:Button runat="server" ID="btnEditDogs" CssClass="btn btn-default" Text="Edit Your Dogs" OnClick="btnEdit_Click" />
+                </div>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit Your Details" OnClick="btnEdit_Click" />
-            </div>
         </div>
     </asp:PlaceHolder>
 

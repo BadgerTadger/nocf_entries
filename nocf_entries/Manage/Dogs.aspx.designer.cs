@@ -10,7 +10,7 @@
 namespace nocf_entries.Manage {
     
     
-    public partial class PersonalInfo {
+    public partial class Dogs {
         
         /// <summary>
         /// ErrorMessage control.

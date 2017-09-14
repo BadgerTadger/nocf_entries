@@ -11,7 +11,7 @@ namespace nocf_entries.Manage
     public partial class PersonalInfo : System.Web.UI.Page
     {
         string mode = "";
-        Owner owner = null;
+        Owner owner = null;        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -118,6 +118,11 @@ namespace nocf_entries.Manage
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Manage/PersonalInfo?mode=e", true);
+        }
+
+        protected void btnAddDog_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Manage/Dogs?mode=a", true);
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

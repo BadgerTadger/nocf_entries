@@ -76,7 +76,7 @@
                     <hr />
                 </div>
                 <div>
-                    <asp:Button runat="server" ID="btnEditDogs" CssClass="btn btn-default" Text="Edit Your Dogs" OnClick="btnEdit_Click" />
+                    <asp:Button runat="server" ID="btnAddDog" CssClass="btn btn-default" Text="Add a dog" OnClick="btnAddDog_Click" />
                 </div>
             </div>
         </div>

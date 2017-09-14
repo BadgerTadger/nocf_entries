@@ -63,3 +63,4 @@ C:\nocf_entries\nocf_entries\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\nocf_entries\nocf_entries\bin\Microsoft.Owin.Security.OAuth.xml
 C:\nocf_entries\nocf_entries\obj\Release\nocf_entries.dll
 C:\nocf_entries\nocf_entries\obj\Release\nocf_entries.pdb
+C:\nocf_entries\nocf_entries\obj\Release\nocf_entries.csprojResolveAssemblyReference.cache

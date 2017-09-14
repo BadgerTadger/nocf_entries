@@ -181,6 +181,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="Manage\Dogs.aspx" />
     <Content Include="Manage\PersonalInfo.aspx" />
     <Content Include="Manage\Web.config" />
     <None Include="Properties\PublishProfiles\entries.pubxml" />
@@ -345,6 +346,7 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Content Include="App_Code\Dog.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -372,6 +374,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Dogs.aspx.cs">
+      <DependentUpon>Dogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\Dogs.aspx.designer.cs">
+      <DependentUpon>Dogs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\PersonalInfo.aspx.cs">
       <DependentUpon>PersonalInfo.aspx</DependentUpon>

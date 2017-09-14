@@ -1,22 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 public class Owner
 {
     private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
     private SqlConnection cn = null;
-
-    public Owner(string id, string username, string email)
-    {
-        _id = id;
-        _userName = username;
-        _email = email;
-    }
 
     private string _id;
     public string ID
@@ -123,6 +113,13 @@ public class Owner
         set { _mobile = value; }
     }
 
+    public Owner(string id, string username, string email)
+    {
+        _id = id;
+        _userName = username;
+        _email = email;
+    }
+
     internal void Load()
     {
         try
@@ -168,7 +165,8 @@ public class Owner
         }
         finally
         {
-            cn.Dispose(); // return connection to pool
+            cn.Close();
+            cn.Dispose();
         }
     }
 

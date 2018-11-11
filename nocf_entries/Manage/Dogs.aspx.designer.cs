@@ -31,76 +31,76 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.PlaceHolder phView;
         
         /// <summary>
-        /// lblName control.
+        /// lblPetName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
+        protected global::System.Web.UI.WebControls.Label lblPetName;
         
         /// <summary>
-        /// lblKCRegName control.
+        /// lblKCName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblKCRegName;
+        protected global::System.Web.UI.WebControls.Label lblKCName;
         
         /// <summary>
-        /// lblUsername control.
+        /// lblRegNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsername;
+        protected global::System.Web.UI.WebControls.Label lblRegNo;
         
         /// <summary>
-        /// lblAddress control.
+        /// lblATCNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress;
+        protected global::System.Web.UI.WebControls.Label lblATCNo;
         
         /// <summary>
-        /// lblEmail control.
+        /// lblBreed control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
+        protected global::System.Web.UI.WebControls.Label lblBreed;
         
         /// <summary>
-        /// ChangeEmail control.
+        /// lblGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ChangeEmail;
+        protected global::System.Web.UI.WebControls.Label lblGender;
         
         /// <summary>
-        /// lblPhone control.
+        /// lblDateOfBirth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPhone;
+        protected global::System.Web.UI.WebControls.Label lblDateOfBirth;
         
         /// <summary>
-        /// lblMobile control.
+        /// lblDescr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMobile;
+        protected global::System.Web.UI.WebControls.Label lblDescr;
         
         /// <summary>
         /// btnEdit control.
@@ -112,13 +112,13 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.Button btnEdit;
         
         /// <summary>
-        /// btnAddDog control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddDog;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// phEdit control.
@@ -130,31 +130,13 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.PlaceHolder phEdit;
         
         /// <summary>
-        /// txtTitle control.
+        /// txtPetName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
-        
-        /// <summary>
-        /// txtFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
-        
-        /// <summary>
-        /// txtLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
+        protected global::System.Web.UI.WebControls.TextBox txtPetName;
         
         /// <summary>
         /// txtKCName control.
@@ -166,85 +148,85 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.TextBox txtKCName;
         
         /// <summary>
-        /// txtAddress1 control.
+        /// txtRegNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress1;
+        protected global::System.Web.UI.WebControls.TextBox txtRegNo;
         
         /// <summary>
-        /// txtAddress2 control.
+        /// RegNumberCustomValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddress2;
+        protected global::System.Web.UI.WebControls.CustomValidator RegNumberCustomValidator1;
         
         /// <summary>
-        /// txtTown control.
+        /// txtATCNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTown;
+        protected global::System.Web.UI.WebControls.TextBox txtATCNo;
         
         /// <summary>
-        /// txtCounty control.
+        /// RegNumberCustomValidator2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCounty;
+        protected global::System.Web.UI.WebControls.CustomValidator RegNumberCustomValidator2;
         
         /// <summary>
-        /// txtPostcode control.
+        /// ddlBreeds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPostcode;
+        protected global::System.Web.UI.WebControls.DropDownList ddlBreeds;
         
         /// <summary>
-        /// ddlCountry control.
+        /// ddlGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCountry;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
         
         /// <summary>
-        /// txtPhone control.
+        /// txtDOB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhone;
+        protected global::System.Web.UI.WebControls.TextBox txtDOB;
         
         /// <summary>
-        /// txtMobile control.
+        /// DOBFormatValidator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMobile;
+        protected global::System.Web.UI.WebControls.CustomValidator DOBFormatValidator;
         
         /// <summary>
-        /// PhoneValidator control.
+        /// txtDescr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator PhoneValidator;
+        protected global::System.Web.UI.WebControls.TextBox txtDescr;
         
         /// <summary>
         /// btnSave control.

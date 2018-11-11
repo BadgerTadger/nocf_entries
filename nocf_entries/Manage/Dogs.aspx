@@ -1,5 +1,17 @@
 ﻿<%@ Page Title="Dog Information" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dogs.aspx.cs" Inherits="nocf_entries.Manage.Dogs" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function CheckRegNumbers(sender, args) {
+            if ($('#txtRegNo').val() == ""
+                && $('#txtATCNo').val() == "") {
+                args.IsValid = false;
+            }
+            else {
+                args.IsValid = true;
+            }
+        }
+    </script>
     <h2><%: Title %>.</h2>
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
@@ -8,53 +20,46 @@
         <div class="row">
             <div class="col-md-5">
                 <div class="form-horizontal">
-                    <h4>Your details</h4>
+                    <h4>Dog Details</h4>
                     <hr />
                     <dl class="dl-horizontal">
-                        <dt>Name:</dt>
+                        <dt>Pet Name:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblName" />
+                            <asp:Label runat="server" ID="lblPetName" />
                         </dd>
-                        <dt>Kennel Club name:</dt>
+                        <dt>Kennel Club Name:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblKCRegName" />
+                            <asp:Label runat="server" ID="lblKCName" />
                         </dd>
-                        <dt>Username:</dt>
+                        <dt>KC Reg. Number:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblUsername" />
+                            <asp:Label runat="server" ID="lblRegNo" />
                         </dd>
-                        <dt>Address:</dt>
+                        <dt>KC ATC Number:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblAddress" />
+                            <asp:Label runat="server" ID="lblATCNo" />
                         </dd>
-                        <dt>Email:</dt>
+                        <dt>Breed:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblEmail" />&nbsp;
-                            <asp:HyperLink NavigateUrl="/Account/ManageEmail" Text="[Change]" Visible="true" ID="ChangeEmail" runat="server" />
+                            <asp:Label runat="server" ID="lblBreed" />
                         </dd>
-                        <dt>Telephone:</dt>
+                        <dt>Gender:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblPhone" />
+                            <asp:Label runat="server" ID="lblGender" />
                         </dd>
-                        <dt>Mobile:</dt>
+                        <dt>Date of Birth:</dt>
                         <dd>
-                            <asp:Label runat="server" ID="lblMobile" />
+                            <asp:Label runat="server" ID="lblDateOfBirth" />
+                        </dd>
+                        <dt>Note:</dt>
+                        <dd>
+                            <asp:Label runat="server" ID="lblDescr" />
                         </dd>
                     </dl>
                 </div>
                 <div class="center-div">
-                    <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit Your Details" OnClick="btnEdit_Click" />
-                </div>
-            </div>
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-5">
-                <div class="form-horizontal">
-                    <h4>Your dogs</h4>
-                    <hr />
-                </div>
-                <div>
-                    <asp:Button runat="server" ID="btnAddDog" CssClass="btn btn-default" Text="Add a dog" OnClick="btnAddDog_Click" />
+                    <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit This Dog" OnClick="btnEdit_Click" />
+                    <asp:Button runat="server" ID="Button1" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
                 </div>
             </div>
         </div>
@@ -64,100 +69,76 @@
 
     <asp:PlaceHolder runat="server" ID="phEdit" Visible="false">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-10">
                 <div class="form-horizontal">
-                    <h4>Update your details</h4>
+                    <h4>Dog Details</h4>
                     <hr />
                     <asp:ValidationSummary runat="server" CssClass="text-danger" />
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtTitle" CssClass="col-md-2 control-label">Title</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtPetName" CssClass="col-md-2 control-label">Pet Name</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtTitle" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:TextBox runat="server" ID="txtPetName" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPetName"
+                                CssClass="text-danger" ErrorMessage="The Pet Name field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="col-md-2 control-label">* First name</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtKCName" CssClass="col-md-2 control-label">* Dog Name</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtFirstName" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtFirstName"
-                                CssClass="text-danger" ErrorMessage="The First name field is required." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtLastName" CssClass="col-md-2 control-label">* Last name</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtLastName" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtLastName"
-                                CssClass="text-danger" ErrorMessage="The Last name field is required." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtKCName" CssClass="col-md-2 control-label">* Kennel Club name</asp:Label>
-                        <div class="col-md-5">
                             <asp:TextBox runat="server" ID="txtKCName" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:Label runat="server">Note: Please enter your name exactly as your registration with the Kennel Club.  This informtaion will be included on the entry form supplied to the Show secretary.<br /></asp:Label>
+                            <asp:Label runat="server">The official registration name of your dog.<br /></asp:Label>
                             <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtKCName"
-                                CssClass="text-danger" ErrorMessage="The Kennel Club name field is required." />
+                                CssClass="text-danger" ErrorMessage="The Kennel Club Registered Name field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtAddress1" CssClass="col-md-2 control-label">* Address line 1</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtRegNo" CssClass="col-md-2 control-label">* KC Registration Number</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtAddress1" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtAddress1"
-                                CssClass="text-danger" ErrorMessage="The Address Line 1 field is required." />
+                            <asp:TextBox runat="server" ID="txtRegNo" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:Label runat="server">Compulsory: The Kennel Club requires that your dog is registered to enter a show. UK residents please enter your KC Registration Number above. If you are a non-UK resident, please enter your ATC Number below.<br /></asp:Label>
+                            <asp:CustomValidator ID="RegNumberCustomValidator1" runat="server" Display="None" ValidateEmptyText="true"
+                                ClientValidationFunction="CheckRegNumbers" ErrorMessage="Either KC Registration Number or ATC Number must be provided" ControlToValidate="txtRegNo"
+                                OnServerValidate="RegNumberCustomValidator2_ServerValidate" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtAddress2" CssClass="col-md-2 control-label">Address line 2</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtATCNo" CssClass="col-md-2 control-label">* ATC Number</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtAddress2" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:TextBox runat="server" ID="txtATCNo" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:CustomValidator ID="RegNumberCustomValidator2" runat="server" Display="None" ValidateEmptyText="true"
+                                ClientValidationFunction="CheckRegNumbers" ErrorMessage="" ControlToValidate="txtATCNo"
+                                OnServerValidate="RegNumberCustomValidator2_ServerValidate" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtTown" CssClass="col-md-2 control-label">* Town</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="ddlBreeds" CssClass="col-md-2 control-label">* Breed</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtTown" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtTown"
-                                CssClass="text-danger" ErrorMessage="The Town field is required." />
+                            <asp:DropDownList runat="server" ID="ddlBreeds" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator Display="Dynamic" InitialValue="Please select..." runat="server" ControlToValidate="ddlBreeds"
+                                CssClass="text-danger" ErrorMessage="The Breed field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtCounty" CssClass="col-md-2 control-label">* County</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="ddlGender" CssClass="col-md-2 control-label">* Gender</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtCounty" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtCounty"
-                                CssClass="text-danger" ErrorMessage="The County field is required." />
+                            <asp:DropDownList runat="server" ID="ddlGender" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator Display="Dynamic" InitialValue="Please select..." runat="server" ControlToValidate="ddlGender"
+                                CssClass="text-danger" ErrorMessage="The Gender field is required." />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtPostcode" CssClass="col-md-2 control-label">* Postcode</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtDOB" CssClass="col-md-2 control-label">* Date of Birth</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtPostcode" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtPostcode"
-                                CssClass="text-danger" ErrorMessage="The Postcode field is required." />
+                            <asp:TextBox runat="server" ID="txtDOB" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtDOB"
+                                CssClass="text-danger" ErrorMessage="The Date of Birth field is required." />
+                            <asp:CustomValidator ID="DOBFormatValidator" runat="server" ControlToValidate="txtDOB" ErrorMessage="Date was in incorrect format" OnServerValidate="DOBFormatValidator_ServerValidate" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="ddlCountry" CssClass="col-md-2 control-label">* Country</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="txtDescr" CssClass="col-md-2 control-label">Notes</asp:Label>
                         <div class="col-md-10">
-                            <asp:DropDownList runat="server" ID="ddlCountry" CssClass="form-control" Width="280" />
-                            <asp:RequiredFieldValidator Display="Dynamic" InitialValue="Please select..." runat="server" ControlToValidate="ddlCountry"
-                                CssClass="text-danger" ErrorMessage="The Country field is required." />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtPhone" CssClass="col-md-2 control-label">** Phone</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" TextMode="SingleLine" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="txtMobile" CssClass="col-md-2 control-label">** Mobile</asp:Label>
-                        <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="txtMobile" CssClass="form-control" TextMode="SingleLine" />
-                            <asp:CustomValidator ID="PhoneValidator" Display="Dynamic" runat="server" ClientValidationFunction="PhoneValidator_ClientValidate" OnServerValidate="PhoneValidator_ServerValidate"
-                                CssClass="text-danger" ErrorMessage="At least one phone number is required." />
+                            <asp:TextBox runat="server" ID="txtDescr" CssClass="form-control" TextMode="MultiLine" Rows="2" />
                         </div>
                     </div>
                     <div class="form-group">

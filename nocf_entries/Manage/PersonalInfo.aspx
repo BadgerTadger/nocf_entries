@@ -68,12 +68,76 @@
                     <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit Your Details" OnClick="btnEdit_Click" />
                 </div>
             </div>
+            <hr />
             <div class="col-md-2">
             </div>
             <div class="col-md-5">
                 <div class="form-horizontal">
                     <h4>Your dogs</h4>
-                    <hr />
+                    <asp:Repeater ID="rptrDogs" runat="server" OnItemCommand="rptrDogs_ItemCommand" >
+                        <HeaderTemplate>
+                            <table>
+                            <tr>
+                                <th>Pet Name</th>
+                                <th>Breed</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+                                <th></th>
+                            </tr>
+                        </HeaderTemplate>
+
+                        <ItemTemplate>
+                        <tr>
+                            <td bgcolor="#CCFFCC">
+                            <asp:Label runat="server" ID="lblPetName" 
+                                text='<%# Eval("PetName") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                                <asp:Label runat="server" ID="lblBreed" 
+                                    text='<%# Eval("Breed") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                                <asp:Label runat="server" ID="lblGender" 
+                                    text='<%# Eval("Gender") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                                <asp:Label runat="server" ID="lblDOB" 
+                                    text='<%# Eval("DateOfBirth") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                                <asp:Button runat="server" ID="btnEditDog" Text="View/Edit Dog" UseSubmitBehavior="false" CommandName='<%# Eval("DogID") %>' />
+                            </td>
+                        </tr>
+                        </ItemTemplate>
+
+                        <AlternatingItemTemplate>
+                        <tr>
+                            <td>
+                            <asp:Label runat="server" ID="lblPetName" 
+                                text='<%# Eval("PetName") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblBreed" 
+                                    text='<%# Eval("Breed") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblGender" 
+                                    text='<%# Eval("Gender") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblDOB" 
+                                    text='<%# Eval("DateOfBirth") %>' />
+                            </td>
+                            <td>
+                                <asp:Button runat="server" ID="btnEditDog" Text="View/Edit Dog" UseSubmitBehavior="false" CommandName='<%# Eval("DogID") %>' />
+                            </td>
+                        </tr>
+                        </AlternatingItemTemplate>
+
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
                 </div>
                 <div>
                     <asp:Button runat="server" ID="btnAddDog" CssClass="btn btn-default" Text="Add a dog" OnClick="btnAddDog_Click" />

@@ -5,6 +5,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.SqlClient;
+using nocf_entries.App_Code;
 
 namespace nocf_entries.Manage
 {
@@ -34,7 +36,7 @@ namespace nocf_entries.Manage
                 }
                 else
                 {
-                    PopulateViewFields();
+                    PopulateViewFields(userid);
                     phEdit.Visible = false;
                     phView.Visible = true;
                 }
@@ -42,7 +44,7 @@ namespace nocf_entries.Manage
             }
         }
 
-        private void PopulateViewFields()
+        private void PopulateViewFields(string userid)
         {
             lblName.Text = BuildName(owner);
             lblKCRegName.Text = owner.KCName;
@@ -51,6 +53,9 @@ namespace nocf_entries.Manage
             lblEmail.Text = owner.Email;
             lblPhone.Text = owner.Phone;
             lblMobile.Text = owner.Mobile;
+            Dog dog = new Dog(owner.ID);
+            rptrDogs.DataSource = dog.GetDogList();
+            rptrDogs.DataBind();
         }
 
         private string BuildAddress(Owner owner)
@@ -131,7 +136,7 @@ namespace nocf_entries.Manage
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
-        {
+        {            
             if (IsValid)
             {
                 owner.Title = txtTitle.Text;
@@ -149,6 +154,11 @@ namespace nocf_entries.Manage
                 owner.Save();
                 Response.Redirect("~/Manage/PersonalInfo", true);
             }
+        }
+
+        protected void rptrDogs_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            Response.Redirect("~/Manage/Dogs.aspx?id=" + e.CommandName);
         }
     }
 }

@@ -65,3 +65,4 @@ C:\nocf_entries\nocf_entries\obj\Debug\nocf_entries.dll
 C:\nocf_entries\nocf_entries\obj\Debug\nocf_entries.pdb
 C:\nocf_entries\nocf_entries\obj\Debug\nocf_entries.csproj.CoreCompileInputs.cache
 C:\nocf_entries\nocf_entries\obj\Debug\nocf_entries.csproj.CopyComplete
+C:\nocf_entries\nocf_entries\obj\Debug\nocf_entries.csprojResolveAssemblyReference.cache

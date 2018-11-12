@@ -36,6 +36,7 @@ namespace nocf_entries.Admin
                             break;
                         case "e":
                             PopulateEditFields(eventID);
+                            PopulateShowList(eventID);
                             phList.Visible = false;
                             phEdit.Visible = true;
                             break;
@@ -53,6 +54,13 @@ namespace nocf_entries.Admin
         {
             rptrEvents.DataSource = Event.GetEventList();
             rptrEvents.DataBind();
+        }
+
+        private void PopulateShowList(int eventID)
+        {
+            Show show = new Show(eventID);
+            rptrShows.DataSource = show.GetShowList();
+            rptrShows.DataBind();
         }
 
         private void PopulateEditFields(int eventID)
@@ -95,12 +103,16 @@ namespace nocf_entries.Admin
 
         protected void rptrShows_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("~/Admin/Shows.aspx?id=" + e.CommandName);
+            int eventID = 0;
+            int.TryParse(Request.QueryString["id"], out eventID);
+            Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&id=" + e.CommandName);
         }
 
         protected void btnAddShow_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Admin/Shows?mode=a", true);
+            int eventID = 0;
+            int.TryParse(Request.QueryString["id"], out eventID);
+            Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&mode=a", true);
         }
     }
 }

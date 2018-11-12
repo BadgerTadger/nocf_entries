@@ -59,7 +59,7 @@
                 </div>
                 <div class="center-div">
                     <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit This Dog" OnClick="btnEdit_Click" />
-                    <asp:Button runat="server" ID="Button1" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
+                    <asp:Button runat="server" CausesValidation="false" ID="Button1" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" ID="btnSave" CssClass="btn btn-default" Text="Save" OnClick="btnSave_Click" />&nbsp;
-                            <asp:Button runat="server" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
+                            <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
                         </div>
                     </div>
                 </div>

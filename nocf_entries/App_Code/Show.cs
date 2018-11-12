@@ -92,14 +92,14 @@ namespace nocf_entries.App_Code
 
             try
             {
-                string sqlCmd = @"SELECT [ShowTypeID]
-                        ,[ShowTypeDescription]
-                        ,[ShowName]
-                        ,[ShowOpens]
-                        ,[JudgingCommences]
-                        ,[ClosingDate]
-                        ,[MaxClassesPerDog]
-                        FROM [dbo].[tblShows] s
+                string sqlCmd = @"SELECT s.ShowTypeID
+                        ,ShowTypeDescription
+                        ,ShowName
+                        ,ShowOpens
+                        ,JudgingCommences
+                        ,ClosingDate
+                        ,MaxClassesPerDog
+                        FROM tblShows s
                         inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
                         WHERE ShowID = @ShowID AND EventID = @EventID";
 
@@ -236,16 +236,16 @@ namespace nocf_entries.App_Code
         {
             DataTable retVal = null;
 
-            string sqlCmd = @"SELECT [ShowID]
-                    ,[EventID]
-                    ,[ShowTypeID]
-                    ,[ShowTypeDescription
-                    ,[ShowName]
-                    ,[ShowOpens]
-                    ,[JudgingCommences]
-                    ,[ClosingDate]
-                    ,[MaxClassesPerDog]
-                    FROM [dbo].[tblShows] s
+            string sqlCmd = @"SELECT ShowID
+                    ,EventID
+                    ,s.ShowTypeID
+                    ,ShowTypeDescription
+                    ,ShowName
+                    ,ShowOpens
+                    ,JudgingCommences
+                    ,ClosingDate
+                    ,MaxClassesPerDog
+                    FROM tblShows s
                     inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID WHERE EventID = @EventID";
 
             cn = new SqlConnection(_connString);

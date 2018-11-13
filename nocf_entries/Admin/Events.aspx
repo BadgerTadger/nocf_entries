@@ -40,7 +40,7 @@
                                 <asp:Label runat="server" ID="lblEventName" text='<%# Eval("EventName") %>' />
                             </td>
                             <td>
-                                <asp:Label runat="server" ID="lblEventActive" text='<%# (Eval("EventActive").ToString() == "true" ? "Yes" : "No") %>' />
+                                <asp:Label runat="server" ID="lblEventActive" text='<%# (Eval("EventActive").ToString() == "True" ? "Yes" : "No") %>' />
                             </td>
                             <td>
                                 <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Event" UseSubmitBehavior="false" CommandName='<%# Eval("EventID") %>' />
@@ -106,7 +106,7 @@
                             <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
                         </td>
                         <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblShowOpens" text='<%# Eval("ShowOpens") %>' />
+                            <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
                         </td>
                         <td bgcolor="#CCFFCC">
                             <asp:Button runat="server" ID="btnEditShow" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
@@ -123,7 +123,7 @@
                             <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
                         </td>
                         <td>
-                            <asp:Label runat="server" ID="lblShowOpens" text='<%# Eval("ShowOpens") %>' />
+                            <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
                         </td>
                         <td>
                             <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />

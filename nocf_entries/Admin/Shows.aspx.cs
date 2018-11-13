@@ -1,6 +1,7 @@
 ﻿using nocf_entries.App_Code;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -61,8 +62,8 @@ namespace nocf_entries.Admin
             show.Load(showID);
             lblShowName.Text = show.ShowName;
             lblShowType.Text = show.ShowTypeDescription;
-            lblShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy");
-            lblJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy");
+            lblShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy HH:mm");
+            lblJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             lblClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
             lblMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
         }
@@ -75,8 +76,8 @@ namespace nocf_entries.Admin
             show.Load(showID);
             txtShowName.Text = show.ShowName;
             ddlShowTypes.SelectedValue = show.ShowTypeID.ToString();
-            txtShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy");
-            txtJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy");
+            txtShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy HH:mm");
+            txtJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             txtClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
             txtMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
         }
@@ -104,8 +105,8 @@ namespace nocf_entries.Admin
                 show.ShowID = showID;
                 show.ShowName = txtShowName.Text;
                 show.ShowTypeID = int.Parse(ddlShowTypes.SelectedValue);
-                show.ShowOpens = DateTime.ParseExact(txtShowOpens.Text, "dd/MM/yyyy", null);
-                show.JudgingCommences = DateTime.ParseExact(txtJudgingCommences.Text, "dd/MM/yyyy", null);
+                show.ShowOpens = DateTime.ParseExact(txtShowOpens.Text, "dd/MM/yyyy HH:mm", null);
+                show.JudgingCommences = DateTime.ParseExact(txtJudgingCommences.Text, "dd/MM/yyyy HH:mm", null);
                 show.ClosingDate = DateTime.ParseExact(txtClosingDate.Text, "dd/MM/yyyy", null);
                 show.MaxClassesPerDog = int.Parse(txtMaxClassesPerDog.Text);
                 show.Save();
@@ -133,6 +134,26 @@ namespace nocf_entries.Admin
         {
             DateTime d;
             args.IsValid = DateTime.TryParseExact(args.Value, new[] { "dd/MM/yyyy", "yyyy-MM-dd" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out d);
+        }
+
+        protected void DateTimeFormatValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            DateTime d;
+            args.IsValid = DateTime.TryParseExact(args.Value, new[] { "dd/MM/yyyy HH:mm", "yyyy-MM-dd HH:mm" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out d);
+        }
+
+        protected void rptrClasses_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            //Response.Redirect
+        }
+
+        protected void btnSelectClasses_Click(object sender, EventArgs e)
+        {
+            int eventID = 0;
+            int.TryParse(Request.QueryString["eventid"], out eventID);
+            int showID = 0;
+            int.TryParse(Request.QueryString["id"], out showID);
+            Response.Redirect("~/Admin/ClassNames?mode=s&eventid=" + eventID + "&showid=" + showID);
         }
     }
 }

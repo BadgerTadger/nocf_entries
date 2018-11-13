@@ -36,6 +36,52 @@
                             <asp:Label runat="server" ID="lblMaxClassesPerDog" />
                         </dd>
                     </dl>
+                </div>                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-horizontal">
+                            <h4>Class List</h4>
+                            <asp:Repeater ID="rptrClasses" runat="server" OnItemCommand="rptrClasses_ItemCommand" >
+                                <HeaderTemplate>
+                                    <table>
+                                    <tr>
+                                        <th>Class Name</th>
+                                        <th></th>
+                                    </tr>
+                                </HeaderTemplate>
+
+                                <ItemTemplate>
+                                <tr>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("ClassNameDescription") %>' />
+                                    </td>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Button runat="server" ID="btnRemoveClass" Text="Remove Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                    </td>
+                                </tr>
+                                </ItemTemplate>
+
+                                <AlternatingItemTemplate>
+                                <tr>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("ClassNameDescription") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Button runat="server" ID="btnRemoveClass" Text="Remove Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                    </td>
+                                </tr>
+                                </AlternatingItemTemplate>
+
+                                <FooterTemplate>
+                                    </table>
+                                </FooterTemplate>
+                            </asp:Repeater>
+                        </div>
+                        <div class="center-div">
+                            <asp:Button runat="server" ID="btnSelectClasses" CssClass="btn btn-default" Text="Select Classes" OnClick="btnSelectClasses_Click" />
+                        </div>
+                    </div>
+                    <hr />
                 </div>
                 <div class="center-div">
                     <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit This Show" OnClick="btnEdit_Click" />
@@ -49,7 +95,7 @@
 
     <asp:PlaceHolder runat="server" ID="phEdit" Visible="false">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="form-horizontal">
                     <h4>Show Details</h4>
                     <hr />
@@ -76,7 +122,7 @@
                             <asp:TextBox runat="server" ID="txtShowOpens" CssClass="form-control" TextMode="SingleLine" />
                             <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtShowOpens"
                                 CssClass="text-danger" ErrorMessage="The Show Opens field is required." />
-                            <asp:CustomValidator ID="ShowOpensDateFormatValidator" runat="server" ControlToValidate="txtShowOpens" ErrorMessage="Date was in incorrect format" OnServerValidate="DateFormatValidator_ServerValidate" />
+                            <asp:CustomValidator ID="ShowOpensDateFormatValidator" runat="server" ControlToValidate="txtShowOpens" ErrorMessage="Date was in incorrect format" OnServerValidate="DateTimeFormatValidator_ServerValidate" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,7 +131,7 @@
                             <asp:TextBox runat="server" ID="txtJudgingCommences" CssClass="form-control" TextMode="SingleLine" />
                             <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtJudgingCommences"
                                 CssClass="text-danger" ErrorMessage="The Judging Commences field is required." />
-                            <asp:CustomValidator ID="JudgingCommencesDateFormatValidator" runat="server" ControlToValidate="txtJudgingCommences" ErrorMessage="Date was in incorrect format" OnServerValidate="DateFormatValidator_ServerValidate" />
+                            <asp:CustomValidator ID="JudgingCommencesDateFormatValidator" runat="server" ControlToValidate="txtJudgingCommences" ErrorMessage="Date was in incorrect format" OnServerValidate="DateTimeFormatValidator_ServerValidate" />
                         </div>
                     </div>
                     <div class="form-group">

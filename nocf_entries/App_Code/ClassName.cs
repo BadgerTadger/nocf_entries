@@ -134,6 +134,34 @@ namespace nocf_entries.App_Code
             return retVal;
         }
 
+        public static DataTable GetSelectedClassesForShow(int showID)
+        {
+            DataTable retVal = null;
+
+            string sqlCmd = @"SELECT lcn.Class_Name_ID, Class_Name_Description, ShowClassID,  ClassNo, 
+                	Case WHEN Judges IS NULL THEN 'Not Set' ELSE Judges END AS Judges,
+	                CASE Gender WHEN 1 THEN 'Dog' WHEN 2 THEN 'Bitch' WHEN 3 THEN 'Dog & Bitch' END as GenderDescr,
+	                Case WHEN ClassCap IS NULL THEN 'No Limit' ELSE CONVERT(varchar(10), ClassCap) END AS ClassCap 
+                    FROM lkpClass_Names lcn INNER JOIN tblShowClasses sc 
+                    on lcn.Class_Name_ID = sc.Class_Name_ID AND ShowID = @ShowID
+                    WHERE lcn.Class_Name_ID > 1
+	                ORDER BY ClassNo";
+
+            SqlConnection cn = new SqlConnection(_connString);
+            cn.Open();
+            SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
+            adr.SelectCommand.CommandType = CommandType.Text;
+            adr.SelectCommand.Parameters.AddWithValue("@ShowID", showID);
+            DataSet ds = new DataSet();
+            adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                retVal = ds.Tables[0];
+            }
+
+            return retVal;
+        }
+
         public static DataTable GetClassesForSelection(int showID)
         {
             DataTable retVal = null;
@@ -164,7 +192,7 @@ namespace nocf_entries.App_Code
             try
             {
                 string sqlCmd = "";
-                    sqlCmd = @"DELETE tblShowClasses
+                sqlCmd = @"DELETE tblShowClasses
                     WHERE ShowID = @ShowID";
 
                 cn = new SqlConnection(_connString);
@@ -185,7 +213,7 @@ namespace nocf_entries.App_Code
         }
 
         public static void SaveSelected(int showClassID, int showID, int classNameID, int classNo, int gender)
-        {           
+        {
             SqlConnection cn = null;
 
             try
@@ -269,6 +297,140 @@ namespace nocf_entries.App_Code
             }
 
             return retVal;
+        }
+
+        public static DataTable GetShowClassByID(int showClassID)
+        {
+            DataTable retVal = null;
+
+            string sqlCmd = @"SELECT lcn.Class_Name_ID, Class_Name_Description, ShowClassID,  ClassNo, Gender,
+                	Case WHEN Judges IS NULL THEN 'Not Set' ELSE Judges END AS Judges,
+	                CASE Gender WHEN 1 THEN 'Dog' WHEN 2 THEN 'Bitch' WHEN 3 THEN 'Dog & Bitch' END as GenderDescr,
+	                Case WHEN ClassCap IS NULL THEN 'No Limit' ELSE CONVERT(varchar(10), ClassCap) END AS ClassCap 
+                    FROM lkpClass_Names lcn INNER JOIN tblShowClasses sc 
+                    on lcn.Class_Name_ID = sc.Class_Name_ID AND ShowClassID = @ShowClassID
+                    WHERE lcn.Class_Name_ID > 1
+	                ORDER BY ClassNo";
+
+            SqlConnection cn = new SqlConnection(_connString);
+            cn.Open();
+            SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
+            adr.SelectCommand.CommandType = CommandType.Text;
+            adr.SelectCommand.Parameters.AddWithValue("@ShowClassID", showClassID);
+            DataSet ds = new DataSet();
+            adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                retVal = ds.Tables[0];
+            }
+
+            return retVal;
+        }
+    }
+
+    public class ShowClass
+    {
+        private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        private int _showClassID;
+
+        public int ShowClassID
+        {
+            get { return _showClassID; }
+            set { _showClassID = value; }
+        }
+
+        private int _showID;
+
+        public int ShowID
+        {
+            get { return _showID; }
+            set { _showID = value; }
+        }
+
+        private int _classNameID;
+
+        public int ClassNameID
+        {
+            get { return _classNameID; }
+            set { _classNameID = value; }
+        }
+
+        private int _classNo;
+
+        public int ClassNo
+        {
+            get { return _classNo; }
+            set { _classNo = value; }
+        }
+
+        private int _genderID;
+
+        public int GenderID
+        {
+            get { return _genderID; }
+            set { _genderID = value; }
+        }
+
+        private int _classCap;
+
+        public int ClassCap
+        {
+            get { return _classCap; }
+            set { _classCap = value; }
+        }
+
+        private string _judges;
+
+        public string Judges
+        {
+            get { return _judges; }
+            set { _judges = value; }
+        }
+
+
+        public ShowClass(int showClassID)
+        {
+            _showClassID = showClassID;
+        }
+
+        internal void Save()
+        {
+            SqlConnection cn = null;
+
+            try
+            {
+                string sqlCmd = "";
+                    sqlCmd = @"UPDATE tblShowClasses
+                   SET ShowID = @ShowID
+                      ,Class_Name_ID = @ClassNameID
+                      ,ClassNo = @ClassNo
+                      ,Gender = @Gender
+                      ,ClassCap = @ClassCap
+                      ,Judges = @Judges
+                    WHERE ShowClassID = @ShowClassID";
+
+                cn = new SqlConnection(_connString);
+                SqlCommand command = new SqlCommand(sqlCmd, cn);
+                cn.Open();
+                command.Parameters.AddWithValue("@ShowClassID", _showClassID);
+                command.Parameters.AddWithValue("@ShowID", _showID);
+                command.Parameters.AddWithValue("@ClassNameID", _classNameID);
+                command.Parameters.AddWithValue("@ClassNo", _classNo);
+                command.Parameters.AddWithValue("@Gender", _genderID);
+                command.Parameters.AddWithValue("@ClassCap", _classCap);
+                command.Parameters.AddWithValue("@Judges", _judges);
+                command.ExecuteNonQuery();
+                cn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                cn.Dispose(); // return connection to pool
+            }
         }
     }
 }

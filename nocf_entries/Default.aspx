@@ -24,6 +24,7 @@
                 <LoggedInTemplate>
                     <ul>
                         <li><a runat="server" href="~/Manage/PersonalInfo" title="Manage your personal information">Manage your personal information</a></li>
+                        <li><a runat="server" href="~/Manage/Events" title="Manage your personal information">Manage your Events</a></li>
                         <li><a runat="server" href="~/Account/Manage" title="Manage your account information">Manage your account information</a></li>
                         <li>
                             <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />

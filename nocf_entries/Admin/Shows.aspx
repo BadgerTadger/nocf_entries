@@ -38,7 +38,7 @@
                     </dl>
                 </div>                
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <div class="form-horizontal">
                             <h4>Class List</h4>
                             <asp:Repeater ID="rptrClasses" runat="server" OnItemCommand="rptrClasses_ItemCommand" >
@@ -46,6 +46,10 @@
                                     <table>
                                     <tr>
                                         <th>Class Name</th>
+                                        <th>Class No</th>
+                                        <th>Gender</th>
+                                        <th>Class Cap</th>
+                                        <th>Judges</th>
                                         <th></th>
                                     </tr>
                                 </HeaderTemplate>
@@ -53,21 +57,44 @@
                                 <ItemTemplate>
                                 <tr>
                                     <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("ClassNameDescription") %>' />
+                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
                                     </td>
                                     <td bgcolor="#CCFFCC">
-                                        <asp:Button runat="server" ID="btnRemoveClass" Text="Remove Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
+                                    </td>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
+                                    </td>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
+                                    </td>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
+                                    </td>
+                                    <td bgcolor="#CCFFCC">
+                                        <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
                                     </td>
                                 </tr>
                                 </ItemTemplate>
-
                                 <AlternatingItemTemplate>
                                 <tr>
                                     <td>
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("ClassNameDescription") %>' />
+                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
                                     </td>
                                     <td>
-                                        <asp:Button runat="server" ID="btnRemoveClass" Text="Remove Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
+                                    </td>
+                                    <td>
+                                        <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
                                     </td>
                                 </tr>
                                 </AlternatingItemTemplate>

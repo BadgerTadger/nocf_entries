@@ -1,0 +1,97 @@
+﻿<%@ Page Title="Manage My Events" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Events.aspx.cs" Inherits="nocf_entries.Manage.Events" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h2><%: Title %>.</h2>
+    <p class="text-danger">
+        <asp:Literal runat="server" ID="ErrorMessage" />
+    </p>
+    <asp:PlaceHolder runat="server" ID="phView" Visible="false">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-horizontal">
+                    <h4>Events</h4>
+                    <asp:Repeater ID="rptrEvents" runat="server" OnItemDataBound="rptrEvents_ItemDataBound" OnItemCommand="rptrEvents_ItemCommand" >
+                        <HeaderTemplate>
+                            <table>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td bgcolor="#CCFFCC">
+                                <asp:Label runat="server" ID="lblEventName" 
+                                    text='<%# Eval("EventName") %>' />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <asp:Repeater ID="rptrShows" runat="server" OnItemCommand="rptrShows_ItemCommand" >
+                                        <HeaderTemplate>
+                                            <table>
+                                            <tr>
+                                                <th>Show Name</th>
+                                                <th>Show Type</th>
+                                                <th>Show Opens</th>
+                                                <th></th>
+                                            </tr>
+                                        </HeaderTemplate>
+
+                                        <ItemTemplate>
+                                        <tr>
+                                            <td bgcolor="#CCFFCC">
+                                                <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
+                                            </td>
+                                            <td bgcolor="#CCFFCC">
+                                                <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
+                                            </td>
+                                            <td bgcolor="#CCFFCC">
+                                                <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
+                                            </td>
+                                            <td bgcolor="#CCFFCC">
+                                                <asp:Button runat="server" ID="btnEditShow" Text="View/Enter Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
+                                            </td>
+                                        </tr>
+                                        </ItemTemplate>
+
+                                        <AlternatingItemTemplate>
+                                        <tr>
+                                            <td>
+                                                <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
+                                            </td>
+                                            <td>
+                                                <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
+                                            </td>
+                                            <td>
+                                                <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
+                                            </td>
+                                            <td>
+                                                <asp:Button runat="server" ID="btnEditEvent" Text="View/Enter Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
+                                            </td>
+                                        </tr>
+                                        </AlternatingItemTemplate>
+
+                                        <FooterTemplate>
+                                            </table>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
+                <div>
+<%--                    <asp:Button runat="server" ID="btnAddDog" CssClass="btn btn-default" Text="Add a dog" OnClick="btnAddDog_Click" />--%>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+        </div>
+    </asp:PlaceHolder>
+</asp:Content>

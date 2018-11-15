@@ -66,6 +66,7 @@ namespace nocf_entries.Admin
             lblJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             lblClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
             lblMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
+            LoadSelectedClasses();
         }
 
         private void PopulateEditFields(int showID)
@@ -142,9 +143,21 @@ namespace nocf_entries.Admin
             args.IsValid = DateTime.TryParseExact(args.Value, new[] { "dd/MM/yyyy HH:mm", "yyyy-MM-dd HH:mm" }, CultureInfo.InvariantCulture, DateTimeStyles.None, out d);
         }
 
+        private void LoadSelectedClasses()
+        {
+            int showID = 0;
+            int.TryParse(Request.QueryString["id"], out showID);
+            rptrClasses.DataSource = ClassName.GetSelectedClassesForShow(showID);
+            rptrClasses.DataBind();
+        }
+
         protected void rptrClasses_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            //Response.Redirect
+            int eventID = 0;
+            int.TryParse(Request.QueryString["eventid"], out eventID);
+            int showID = 0;
+            int.TryParse(Request.QueryString["id"], out showID);
+            Response.Redirect("~/Admin/ShowClasses?eventid=" + eventID + "&showid=" + showID + "&id=" + e.CommandName);
         }
 
         protected void btnSelectClasses_Click(object sender, EventArgs e)

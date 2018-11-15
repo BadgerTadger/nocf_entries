@@ -146,13 +146,18 @@ namespace nocf_entries.App_Code
             }
         }
 
-        internal static DataTable GetEventList()
+        internal static DataTable GetEventList(bool getActiveOnly = false)
         {
             DataTable retVal = null;
 
             string sqlCmd = @"SELECT [EventID]
                       ,[EventName],[EventActive]
                       FROM tblEvents";
+
+            if(getActiveOnly)
+            {
+                sqlCmd += @" WHERE EventActive = 1 ";
+            }
 
             SqlConnection cn = new SqlConnection(_connString);
             cn.Open();

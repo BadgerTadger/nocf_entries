@@ -175,6 +175,7 @@
     <Content Include="Admin\ClassNames.aspx" />
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\Events.aspx" />
+    <Content Include="Admin\ShowClasses.aspx" />
     <Content Include="Admin\Shows.aspx" />
     <Content Include="App_Data\Countries.xml" />
     <Content Include="Contact.aspx" />
@@ -188,6 +189,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="Manage\Dogs.aspx" />
+    <Content Include="Manage\Events.aspx" />
     <Content Include="Manage\PersonalInfo.aspx" />
     <Content Include="Manage\Web.config" />
     <None Include="Properties\PublishProfiles\entries.pubxml" />
@@ -373,6 +375,13 @@
     <Compile Include="Admin\Events.aspx.designer.cs">
       <DependentUpon>Events.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ShowClasses.aspx.cs">
+      <DependentUpon>ShowClasses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ShowClasses.aspx.designer.cs">
+      <DependentUpon>ShowClasses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Shows.aspx.cs">
       <DependentUpon>Shows.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -418,6 +427,13 @@
     </Compile>
     <Compile Include="Manage\Dogs.aspx.designer.cs">
       <DependentUpon>Dogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage\Events.aspx.cs">
+      <DependentUpon>Events.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage\Events.aspx.designer.cs">
+      <DependentUpon>Events.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manage\PersonalInfo.aspx.cs">
       <DependentUpon>PersonalInfo.aspx</DependentUpon>

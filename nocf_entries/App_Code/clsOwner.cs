@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace nocf_entries.App_Code
 {
-    public class Owner
+    public class clsOwner
     {
         private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlConnection cn = null;
@@ -115,7 +115,7 @@ namespace nocf_entries.App_Code
             set { _mobile = value; }
         }
 
-        public Owner(string id, string username, string email)
+        public clsOwner(string id, string username, string email)
         {
             _id = id;
             _userName = username;

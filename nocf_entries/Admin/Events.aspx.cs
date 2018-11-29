@@ -52,20 +52,20 @@ namespace nocf_entries.Admin
 
         private void PopulateEventList()
         {
-            rptrEvents.DataSource = Event.GetEventList();
+            rptrEvents.DataSource = clsEvent.GetUpcomingEventList();
             rptrEvents.DataBind();
         }
 
         private void PopulateShowList(int eventID)
         {
-            Show show = new Show(eventID);
+            clsShow show = new clsShow(eventID);
             rptrShows.DataSource = show.GetShowList();
             rptrShows.DataBind();
         }
 
         private void PopulateEditFields(int eventID)
         {
-            Event showEvent = new Event();
+            clsEvent showEvent = new clsEvent();
             showEvent.Load(eventID);
             txtEventName.Text = showEvent.EventName;
             chkEventActive.Checked = showEvent.EventActive;
@@ -87,7 +87,7 @@ namespace nocf_entries.Admin
             {
                 int eventID = 0;
                 int.TryParse(Request.QueryString["id"], out eventID);
-                Event showEvent = new Event();
+                clsEvent showEvent = new clsEvent();
                 showEvent.EventID = eventID;
                 showEvent.EventName = txtEventName.Text;
                 showEvent.EventActive = chkEventActive.Checked;

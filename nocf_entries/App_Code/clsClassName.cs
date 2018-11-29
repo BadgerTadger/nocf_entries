@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace nocf_entries.App_Code
 {
-    public class ClassName
+    public class clsClassName
     {
         private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlConnection cn = null;
@@ -26,15 +26,31 @@ namespace nocf_entries.App_Code
             set { _class_Name_Description = value; }
         }
 
-        public ClassName()
+        private int _weighting;
+        public int Weighting
+        {
+            get { return _weighting; }
+            set { _weighting = value; }
+        }
+
+        private int _gender;
+        public int Gender
+        {
+            get { return _gender; }
+            set { _gender = value; }
+        }
+
+        public clsClassName()
         {
 
         }
 
-        public ClassName(int classNameID, string classNameDescription)
+        public clsClassName(int classNameID, string classNameDescription, int weighting, int gender)
         {
             _class_Name_ID = classNameID;
             _class_Name_Description = classNameDescription;
+            _weighting = weighting;
+            _gender = gender;
         }
 
         internal void Load(int classNameID)
@@ -43,7 +59,7 @@ namespace nocf_entries.App_Code
 
             try
             {
-                string sqlCmd = @"SELECT [Class_Name_ID],[Class_Name_Description]
+                string sqlCmd = @"SELECT Class_Name_ID,Class_Name_Description,Weighting,Gender
                 FROM lkpClass_Names WHERE Class_Name_ID = @ClassNameID";
 
                 cn = new SqlConnection(_connString);
@@ -56,7 +72,13 @@ namespace nocf_entries.App_Code
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     {
+                        int wt = 0;
+                        int gender = 0;
                         _class_Name_Description = ds.Tables[0].Rows[0]["Class_Name_Description"].ToString();
+                        int.TryParse(ds.Tables[0].Rows[0]["Weighting"].ToString(), out wt);
+                        _weighting = wt;
+                        int.TryParse(ds.Tables[0].Rows[0]["Gender"].ToString(), out gender);
+                        _gender = gender;
                     }
 
                 }
@@ -79,15 +101,17 @@ namespace nocf_entries.App_Code
                 string sqlCmd = "";
                 if (_class_Name_ID == 0)
                 {
-                    sqlCmd = @"INSERT INTO [dbo].[lkpClass_Names]
-                       ([Class_Name_Description])
+                    sqlCmd = @"INSERT INTO lkpClass_Names
+                       (Class_Name_Description,Weighting,Gender)
                  VALUES
-                       (@ClassNameDescription)";
+                       (@ClassNameDescription,@Weighting,@Gender)";
                 }
                 else
                 {
-                    sqlCmd = @"UPDATE [dbo].[lkpClass_Names]
-                   SET [Class_Name_Description] = @ClassNameDescription
+                    sqlCmd = @"UPDATE lkpClass_Names
+                   SET Class_Name_Description = @ClassNameDescription,
+                    Weighting = @Weighting,
+                    Gender = @Gender
                    WHERE Class_Name_ID = @ClassNameID";
                 }
 
@@ -95,6 +119,8 @@ namespace nocf_entries.App_Code
                 SqlCommand command = new SqlCommand(sqlCmd, cn);
                 cn.Open();
                 command.Parameters.AddWithValue("@ClassNameDescription", _class_Name_Description);
+                command.Parameters.AddWithValue("@Weighting", _weighting);
+                command.Parameters.AddWithValue("@Gender", _gender);
                 if (_class_Name_ID != 0)
                 {
                     command.Parameters.AddWithValue("@ClassNameID", _class_Name_ID);
@@ -117,7 +143,9 @@ namespace nocf_entries.App_Code
             DataTable retVal = null;
 
             string sqlCmd = @"SELECT Class_Name_ID
-                ,Class_Name_Description FROM lkpClass_Names
+                ,Class_Name_Description, Weighting,
+	            CASE Gender WHEN 1 THEN 'Dog' WHEN 2 THEN 'Bitch' WHEN 3 THEN 'Dog & Bitch' END as GenderDescr
+                FROM lkpClass_Names
                 WHERE Class_Name_ID > 1";
 
             SqlConnection cn = new SqlConnection(_connString);
@@ -364,14 +392,6 @@ namespace nocf_entries.App_Code
             set { _classNo = value; }
         }
 
-        private int _genderID;
-
-        public int GenderID
-        {
-            get { return _genderID; }
-            set { _genderID = value; }
-        }
-
         private int _classCap;
 
         public int ClassCap
@@ -405,7 +425,6 @@ namespace nocf_entries.App_Code
                    SET ShowID = @ShowID
                       ,Class_Name_ID = @ClassNameID
                       ,ClassNo = @ClassNo
-                      ,Gender = @Gender
                       ,ClassCap = @ClassCap
                       ,Judges = @Judges
                     WHERE ShowClassID = @ShowClassID";
@@ -417,7 +436,6 @@ namespace nocf_entries.App_Code
                 command.Parameters.AddWithValue("@ShowID", _showID);
                 command.Parameters.AddWithValue("@ClassNameID", _classNameID);
                 command.Parameters.AddWithValue("@ClassNo", _classNo);
-                command.Parameters.AddWithValue("@Gender", _genderID);
                 command.Parameters.AddWithValue("@ClassCap", _classCap);
                 command.Parameters.AddWithValue("@Judges", _judges);
                 command.ExecuteNonQuery();

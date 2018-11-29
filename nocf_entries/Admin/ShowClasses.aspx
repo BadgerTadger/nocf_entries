@@ -19,13 +19,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:HiddenField ID="hdnGender" runat="server" />
-                        <asp:Label runat="server" AssociatedControlID="lblGenderDescr" CssClass="col-md-2 control-label">Gender</asp:Label>
-                        <div class="col-md-10">
-                            <asp:Label runat="server" ID="lblGenderDescr" CssClass="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="lblClassNo" CssClass="col-md-2 control-label">Class No.</asp:Label>
                         <div class="col-md-10">
                             <asp:Label runat="server" ID="lblClassNo" CssClass="form-control"  />

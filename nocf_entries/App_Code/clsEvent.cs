@@ -8,7 +8,7 @@ using System.Web;
 
 namespace nocf_entries.App_Code
 {
-    public class Event
+    public class clsEvent
     {
         private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlConnection cn = null;
@@ -34,7 +34,7 @@ namespace nocf_entries.App_Code
             set { _eventActive = value; }
         }
 
-        public Event()
+        public clsEvent()
         {
 
         }
@@ -146,7 +146,38 @@ namespace nocf_entries.App_Code
             }
         }
 
-        internal static DataTable GetEventList(bool getActiveOnly = false)
+        internal static DataTable GetMyEventList(string ownerID, bool getActiveOnly = false)
+        {
+            DataTable retVal = null;
+
+            string sqlCmd = @"SELECT DISTINCT e.EventID
+                    ,EventName,EventActive
+                    FROM tblEvents e
+                    INNER JOIN tblShows s ON e.EventID = s.EventID
+                    INNER JOIN tblEntries en ON s.ShowID = en.ShowID
+                    AND OwnerID = @OwnerID";
+
+            if (getActiveOnly)
+            {
+                sqlCmd += @" WHERE EventActive = 1 ";
+            }
+
+            SqlConnection cn = new SqlConnection(_connString);
+            cn.Open();
+            SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
+            adr.SelectCommand.CommandType = CommandType.Text;
+            adr.SelectCommand.Parameters.AddWithValue("@OwnerID", ownerID);
+            DataSet ds = new DataSet();
+            adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                retVal = ds.Tables[0];
+            }
+
+            return retVal;
+        }
+
+        internal static DataTable GetUpcomingEventList(bool getActiveOnly = false)
         {
             DataTable retVal = null;
 
@@ -154,7 +185,7 @@ namespace nocf_entries.App_Code
                       ,[EventName],[EventActive]
                       FROM tblEvents";
 
-            if(getActiveOnly)
+            if (getActiveOnly)
             {
                 sqlCmd += @" WHERE EventActive = 1 ";
             }

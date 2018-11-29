@@ -10,6 +10,8 @@
                             <table>
                             <tr>
                                 <th>Class Name</th>
+                                <th>Weighting</th>
+                                <th>Gender</th>
                                 <th></th>
                             </tr>
                         </HeaderTemplate>
@@ -19,6 +21,13 @@
                             <td bgcolor="#CCFFCC">
                             <asp:Label runat="server" ID="lblClassName" 
                                 text='<%# Eval("Class_Name_Description") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                            <asp:Label runat="server" ID="lblWeighting" 
+                                text='<%# Eval("Weighting") %>' />
+                            </td>
+                            <td bgcolor="#CCFFCC">
+                                <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
                             </td>
                             <td bgcolor="#CCFFCC">
                                 <asp:Button runat="server" ID="btnEditClass" Text="View/Edit Class" UseSubmitBehavior="false" CommandName='<%# Eval("Class_Name_ID") %>' />
@@ -31,6 +40,13 @@
                             <td>
                             <asp:Label runat="server" ID="lblClassName" 
                                 text='<%# Eval("Class_Name_Description") %>' />
+                            </td>
+                            <td>
+                            <asp:Label runat="server" ID="lblWeighting" 
+                                text='<%# Eval("Weighting") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
                             </td>
                             <td>
                                 <asp:Button runat="server" ID="btnEditClass" Text="View/Edit Class" UseSubmitBehavior="false" CommandName='<%# Eval("Class_Name_ID") %>' />
@@ -65,6 +81,21 @@
                 </div>
             </div>
             <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="ddlGender" CssClass="col-md-2 control-label">* Gender</asp:Label>
+                <div class="col-md-10">
+                    <asp:DropDownList runat="server" ID="ddlGender" CssClass="form-control"></asp:DropDownList>
+                    <asp:RequiredFieldValidator Display="Dynamic" InitialValue="Please select..." runat="server" ControlToValidate="ddlGender"
+                        CssClass="text-danger" ErrorMessage="The Gender field is required." />
+                </div>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="txtWeighting" CssClass="col-md-2 control-label">Weighting</asp:Label>
+                <div class="col-md-10">
+                    <asp:TextBox runat="server" ID="txtWeighting" CssClass="form-control" TextMode="SingleLine" />
+                    <asp:CustomValidator ID="ClassWeightingFormatValidator" runat="server" ControlToValidate="txtWeighting" ErrorMessage="Weighting must be empty or a number" OnServerValidate="ClassWeightingFormatValidator_ServerValidate" />
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <asp:Button runat="server" ID="btnSave" CssClass="btn btn-default" Text="Save" OnClick="btnSave_Click" />&nbsp;
                     <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
@@ -81,7 +112,6 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <th>Class Name</th>
                                 <th>Class Number</th>
-                                <th>Gender</th>
                                 <th></th>
                         </HeaderTemplate>
                         <ItemTemplate>
@@ -94,10 +124,6 @@
                                     <asp:HiddenField ID="hdnClassNameID" Value='<%# Eval("Class_Name_ID") %>' runat="server" />
                                     <asp:TextBox ID="txtClassNo" Text='<%# Eval("ClassNo") %>' runat="server" /><br />
                                     <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="ddlGender" runat="server">
-                                    </asp:DropDownList>
                                 </td>
                             </tr>
                         </ItemTemplate>

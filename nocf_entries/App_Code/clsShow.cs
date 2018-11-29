@@ -8,7 +8,7 @@ using System.Web;
 
 namespace nocf_entries.App_Code
 {
-    public class Show
+    public class clsShow
     {
         private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlConnection cn = null;
@@ -76,12 +76,12 @@ namespace nocf_entries.App_Code
             set { _maxClassesPerDog = value; }
         }
 
-        public Show()
+        public clsShow()
         {
 
         }
 
-        public Show(int eventID)
+        public clsShow(int eventID)
         {
             _eventID = eventID;
         }
@@ -246,13 +246,49 @@ namespace nocf_entries.App_Code
                     ,ClosingDate
                     ,MaxClassesPerDog
                     FROM tblShows s
-                    inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID WHERE EventID = @EventID";
+                    inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
+                    WHERE EventID = @EventID";
 
             cn = new SqlConnection(_connString);
             cn.Open();
             SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
             adr.SelectCommand.CommandType = CommandType.Text;
             adr.SelectCommand.Parameters.AddWithValue("@EventID", _eventID);
+            DataSet ds = new DataSet();
+            adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                retVal = ds.Tables[0];
+            }
+
+            return retVal;
+        }
+
+        internal DataTable GetMyShowList(string ownerID)
+        {
+            DataTable retVal = null;
+
+            string sqlCmd = @"SELECT s.ShowID
+                        ,EventID
+                        ,s.ShowTypeID
+                        ,ShowTypeDescription
+                        ,ShowName
+                        ,ShowOpens
+                        ,JudgingCommences
+                        ,ClosingDate
+                        ,MaxClassesPerDog
+                        FROM tblShows s
+                        inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
+                        INNER JOIN tblEntries en ON s.ShowID = en.ShowID
+                        AND OwnerID = @OwnerID
+                        WHERE EventID = @EventID";
+                
+            cn = new SqlConnection(_connString);
+            cn.Open();
+            SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
+            adr.SelectCommand.CommandType = CommandType.Text;
+            adr.SelectCommand.Parameters.AddWithValue("@EventID", _eventID);
+            adr.SelectCommand.Parameters.AddWithValue("@OwnerID", ownerID);
             DataSet ds = new DataSet();
             adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
             if (ds.Tables[0].Rows.Count > 0)

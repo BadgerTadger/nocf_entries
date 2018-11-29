@@ -61,14 +61,14 @@ namespace nocf_entries.Admin
 
         private void PopulateClassList(int showID)
         {
-            DataTable classList = ClassName.GetClassesForSelection(showID);
+            DataTable classList = clsClassName.GetClassesForSelection(showID);
             rptrClasses.DataSource = classList;
             rptrClasses.DataBind();
         }
 
         private void PopulateViewFields(int classNameID)
         {
-            rptrClassNames.DataSource = ClassName.GetClassNameList();
+            rptrClassNames.DataSource = clsClassName.GetClassNameList();
             rptrClassNames.DataBind();
         }
 
@@ -76,10 +76,40 @@ namespace nocf_entries.Admin
         {
             if(classNameID > 0)
             {
-                ClassName className = new ClassName();
+                clsClassName className = new clsClassName();
                 className.Load(classNameID);
                 txtClassName.Text = className.Class_Name_Description;
+                txtWeighting.Text = className.Weighting.ToString();
+                PopulateGenderList(className);
             }
+        }
+
+        private void PopulateGenderList(clsClassName className)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Descr");
+            dt.Columns.Add("Value");
+
+            DataRow rowDog = dt.NewRow();
+            rowDog["Descr"] = "Dog";
+            rowDog["Value"] = "1";
+            dt.Rows.Add(rowDog);
+
+            DataRow rowBitch = dt.NewRow();
+            rowBitch["Descr"] = "Bitch";
+            rowBitch["Value"] = "2";
+            dt.Rows.Add(rowBitch);
+
+            DataRow rowDandB = dt.NewRow();
+            rowDandB["Descr"] = "Dog & Bitch";
+            rowDandB["Value"] = "3";
+            dt.Rows.Add(rowDandB);
+
+            ddlGender.DataValueField = "Value";
+            ddlGender.DataTextField = "Descr";
+            ddlGender.DataSource = dt;
+            ddlGender.DataBind();
+            ddlGender.SelectedValue = className.Gender.ToString();
         }
 
         protected void btnAddClassName_Click(object sender, EventArgs e)
@@ -93,9 +123,11 @@ namespace nocf_entries.Admin
             {
                 int classNameID = 0;
                 int.TryParse(Request.QueryString["id"], out classNameID);
-                ClassName className = new ClassName();
+                clsClassName className = new clsClassName();
                 className.Class_Name_ID = classNameID;
                 className.Class_Name_Description = txtClassName.Text;
+                className.Weighting = int.Parse(txtWeighting.Text);
+                className.Gender = int.Parse(ddlGender.SelectedValue);
                 className.Save();
                 Response.Redirect("~/Admin/ClassNames");
             }
@@ -145,7 +177,7 @@ namespace nocf_entries.Admin
             //Save
             if (!isError)
             {
-                ClassName.DeleteClassesForShow(showID);
+                clsClassName.DeleteClassesForShow(showID);
 
                 foreach (RepeaterItem ri in rptrClasses.Items)
                 {
@@ -168,7 +200,7 @@ namespace nocf_entries.Admin
                         DropDownList ddl = ri.FindControl("ddlGender") as DropDownList;
                         int.TryParse(ddl.SelectedValue.ToString(), out gender);
 
-                        ClassName.SaveSelected(showClassID, showID, classNameID, classNo, gender);
+                        clsClassName.SaveSelected(showClassID, showID, classNameID, classNo, gender);
                     }
                 }
 
@@ -181,30 +213,30 @@ namespace nocf_entries.Admin
             if (e.Item.ItemType == ListItemType.Item ||
                      e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Descr");
-                dt.Columns.Add("Value");
+                //DataTable dt = new DataTable();
+                //dt.Columns.Add("Descr");
+                //dt.Columns.Add("Value");
 
-                DataRow rowDog = dt.NewRow();
-                rowDog["Descr"] = "Dog";
-                rowDog["Value"] = "1";
-                dt.Rows.Add(rowDog);
+                //DataRow rowDog = dt.NewRow();
+                //rowDog["Descr"] = "Dog";
+                //rowDog["Value"] = "1";
+                //dt.Rows.Add(rowDog);
 
-                DataRow rowBitch = dt.NewRow();
-                rowBitch["Descr"] = "Bitch";
-                rowBitch["Value"] = "2";
-                dt.Rows.Add(rowBitch);
+                //DataRow rowBitch = dt.NewRow();
+                //rowBitch["Descr"] = "Bitch";
+                //rowBitch["Value"] = "2";
+                //dt.Rows.Add(rowBitch);
 
-                DataRow rowDandB = dt.NewRow();
-                rowDandB["Descr"] = "Dog & Bitch";
-                rowDandB["Value"] = "3";
-                dt.Rows.Add(rowDandB);
+                //DataRow rowDandB = dt.NewRow();
+                //rowDandB["Descr"] = "Dog & Bitch";
+                //rowDandB["Value"] = "3";
+                //dt.Rows.Add(rowDandB);
 
-                ((DropDownList)e.Item.FindControl("ddlGender")).DataValueField = "Value";
-                ((DropDownList)e.Item.FindControl("ddlGender")).DataTextField = "Descr";
-                ((DropDownList)e.Item.FindControl("ddlGender")).DataSource = dt;
-                ((DropDownList)e.Item.FindControl("ddlGender")).DataBind();
-                ((DropDownList)e.Item.FindControl("ddlGender")).SelectedValue = DataBinder.Eval(e.Item.DataItem, "Gender").ToString();
+                //((DropDownList)e.Item.FindControl("ddlGender")).DataValueField = "Value";
+                //((DropDownList)e.Item.FindControl("ddlGender")).DataTextField = "Descr";
+                //((DropDownList)e.Item.FindControl("ddlGender")).DataSource = dt;
+                //((DropDownList)e.Item.FindControl("ddlGender")).DataBind();
+                //((DropDownList)e.Item.FindControl("ddlGender")).SelectedValue = DataBinder.Eval(e.Item.DataItem, "Gender").ToString();
             }
         }
 
@@ -215,6 +247,20 @@ namespace nocf_entries.Admin
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
             Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&id=" + showID);
+        }
+
+        protected void ClassWeightingFormatValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            bool argsValid = true;
+            if (!string.IsNullOrEmpty(args.Value))
+            {
+                int weighting = 0;
+                if (!int.TryParse(args.Value, out weighting))
+                {
+                    argsValid = false;
+                }
+            }
+            args.IsValid = argsValid;
         }
     }
 }

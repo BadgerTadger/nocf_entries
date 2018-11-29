@@ -58,6 +58,33 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.TextBox txtClassName;
         
         /// <summary>
+        /// ddlGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
+        
+        /// <summary>
+        /// txtWeighting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWeighting;
+        
+        /// <summary>
+        /// ClassWeightingFormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ClassWeightingFormatValidator;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

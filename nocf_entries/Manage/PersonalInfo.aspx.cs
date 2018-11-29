@@ -13,14 +13,14 @@ namespace nocf_entries.Manage
     public partial class PersonalInfo : System.Web.UI.Page
     {
         string mode = "";
-        Owner owner = null;        
+        clsOwner owner = null;        
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             string userid = User.Identity.GetUserId();
             var user = userManager.FindById(userid);
-            owner = new Owner(userid, user.UserName, user.Email);
+            owner = new clsOwner(userid, user.UserName, user.Email);
             owner.Load();
 
             if (!Page.IsPostBack)
@@ -53,12 +53,12 @@ namespace nocf_entries.Manage
             lblEmail.Text = owner.Email;
             lblPhone.Text = owner.Phone;
             lblMobile.Text = owner.Mobile;
-            Dog dog = new Dog(owner.ID);
+            clsDog dog = new clsDog(owner.ID);
             rptrDogs.DataSource = dog.GetDogList();
             rptrDogs.DataBind();
         }
 
-        private string BuildAddress(Owner owner)
+        private string BuildAddress(clsOwner owner)
         {
             string retVal = string.Format(@"{0}{1}<br />{2}<br />{3}<br />{4}<br />{5}",
                 owner.Address1,
@@ -71,7 +71,7 @@ namespace nocf_entries.Manage
             return retVal;
         }
 
-        private string BuildName(Owner owner)
+        private string BuildName(clsOwner owner)
         {
             string retVal = string.Format(@"{0}{1} {2}",
                 string.IsNullOrWhiteSpace(owner.Title) ? "" : owner.Title + " ", 

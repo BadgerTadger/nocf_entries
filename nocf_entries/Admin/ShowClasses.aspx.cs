@@ -32,12 +32,10 @@ namespace nocf_entries.Admin
 
         private void PopulateEditFields(int showClassID)
         {
-            DataTable dt = ClassName.GetShowClassByID(showClassID);
+            DataTable dt = clsClassName.GetShowClassByID(showClassID);
             DataRow row = dt.Rows[0];
             hdnClassNameID.Value = row["Class_Name_ID"].ToString();
             lblShowClassName.Text = row["Class_Name_Description"].ToString();
-            hdnGender.Value = row["Gender"].ToString();
-            lblGenderDescr.Text = row["GenderDescr"].ToString();
             lblClassNo.Text = row["ClassNo"].ToString();
             txtJudges.Text = row["Judges"].ToString();
             int classCap = 0;
@@ -71,7 +69,6 @@ namespace nocf_entries.Admin
                 sc.ShowID = showID;
                 sc.ClassNameID = int.Parse(hdnClassNameID.Value);
                 sc.ClassNo = int.Parse(lblClassNo.Text);
-                sc.GenderID = int.Parse(hdnGender.Value);
                 int classCap = 0;
                 int.TryParse(txtClassCap.Text, out classCap);
                 sc.ClassCap = classCap;

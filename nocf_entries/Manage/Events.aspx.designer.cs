@@ -31,12 +31,21 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.PlaceHolder phView;
         
         /// <summary>
-        /// rptrEvents control.
+        /// rptrMyEvents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptrEvents;
+        protected global::System.Web.UI.WebControls.Repeater rptrMyEvents;
+        
+        /// <summary>
+        /// rptrUpcomingEvents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptrUpcomingEvents;
     }
 }

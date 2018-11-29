@@ -47,7 +47,6 @@
                                     <tr>
                                         <th>Class Name</th>
                                         <th>Class No</th>
-                                        <th>Gender</th>
                                         <th>Class Cap</th>
                                         <th>Judges</th>
                                         <th></th>
@@ -61,9 +60,6 @@
                                     </td>
                                     <td bgcolor="#CCFFCC">
                                         <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
                                     </td>
                                     <td bgcolor="#CCFFCC">
                                         <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
@@ -83,9 +79,6 @@
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
                                     </td>
                                     <td>
                                         <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />

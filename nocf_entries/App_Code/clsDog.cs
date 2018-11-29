@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace nocf_entries.App_Code
 {
-    public class Dog
+    public class clsDog
     {
         private static string _connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private SqlConnection cn = null;
@@ -102,7 +102,15 @@ namespace nocf_entries.App_Code
             set { _nlwu = value; }
         }
 
-        public Dog(string ownerID)
+        private int _lowestClass;
+        public int LowestClass
+        {
+            get { return _lowestClass; }
+            set { _lowestClass = value; }
+        }
+
+
+        public clsDog(string ownerID)
         {
             _ownerId = ownerID;
         }
@@ -160,7 +168,7 @@ namespace nocf_entries.App_Code
                         _atcNo = ds.Tables[0].Rows[0]["ATCNo"].ToString();
                         _dateOfBirth = DateTime.Parse(ds.Tables[0].Rows[0]["DateOfBirth"].ToString());
                         _descr = ds.Tables[0].Rows[0]["Descr"].ToString();
-                        _nlwu = ds.Tables[0].Rows[0]["NLWU"].ToString() == "1";
+                        _nlwu = ds.Tables[0].Rows[0]["NLWU"].ToString() == "True";
                     }
 
                 }

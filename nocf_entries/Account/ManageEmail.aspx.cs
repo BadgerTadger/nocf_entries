@@ -69,7 +69,7 @@ namespace nocf_entries.Account
                 //SmtpClient mailClient = new SmtpClient("relay-hosting.secureserver.net");  //On Godaddy Server
                 SmtpClient mailClient = new SmtpClient("smtpout.europe.secureserver.net", 80); //Local Server
 
-                mailClient.Credentials = new System.Net.NetworkCredential("info@nocf.co.uk", "nocfemail14");
+                mailClient.Credentials = new System.Net.NetworkCredential("entries@nocf.co.uk", "Dazzer67");
                 mailClient.Send(message);
 
             }

@@ -49,24 +49,6 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.Label lblShowClassName;
         
         /// <summary>
-        /// hdnGender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnGender;
-        
-        /// <summary>
-        /// lblGenderDescr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGenderDescr;
-        
-        /// <summary>
         /// lblClassNo control.
         /// </summary>
         /// <remarks>

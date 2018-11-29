@@ -14,14 +14,14 @@ namespace nocf_entries.Manage
     public partial class Dogs : System.Web.UI.Page
     {
         string _mode = "";
-        Owner _owner = null;
+        clsOwner _owner = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             var userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             string userid = User.Identity.GetUserId();
             var user = userManager.FindById(userid);
-            _owner = new Owner(userid, user.UserName, user.Email);
+            _owner = new clsOwner(userid, user.UserName, user.Email);
             _owner.Load();
             if (!Page.IsPostBack)
             {
@@ -55,7 +55,7 @@ namespace nocf_entries.Manage
 
         private void PopulateEditFields(int dogID)
         {
-            Dog _dog = new Dog(_owner.ID);
+            clsDog _dog = new clsDog(_owner.ID);
             _dog.Load(dogID);
             txtPetName.Text = _dog.PetName;
             txtKCName.Text = _dog.KCName;
@@ -69,7 +69,7 @@ namespace nocf_entries.Manage
 
         private void LoadBreedList()
         {
-            List<Breed> breedList = Dog.GetBreedList();
+            List<Breed> breedList = clsDog.GetBreedList();
 
             foreach (Breed breed in breedList)
             {
@@ -86,7 +86,7 @@ namespace nocf_entries.Manage
 
         private void PopulateViewFields(int dogID)
         {
-            Dog _dog = new Dog(_owner.ID);
+            clsDog _dog = new clsDog(_owner.ID);
             _dog.Load(dogID);
             lblPetName.Text = _dog.PetName;
             lblKCName.Text = _dog.KCName;
@@ -125,7 +125,7 @@ namespace nocf_entries.Manage
             {
                 int _dogID = 0;
                 int.TryParse(Request.QueryString["id"], out _dogID);
-                Dog _dog = new Dog(_owner.ID);
+                clsDog _dog = new clsDog(_owner.ID);
                 _dog.DogID = _dogID;
                 _dog.OwnerID = _owner.ID;
                 _dog.KCName = txtKCName.Text;

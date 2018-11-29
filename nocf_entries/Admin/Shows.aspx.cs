@@ -13,7 +13,6 @@ namespace nocf_entries.Admin
     public partial class Shows : System.Web.UI.Page
     {
         string _mode = "";
-        Event showEvent = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -58,7 +57,7 @@ namespace nocf_entries.Admin
         {
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
-            Show show = new Show(eventID);
+            clsShow show = new clsShow(eventID);
             show.Load(showID);
             lblShowName.Text = show.ShowName;
             lblShowType.Text = show.ShowTypeDescription;
@@ -73,7 +72,7 @@ namespace nocf_entries.Admin
         {
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
-            Show show = new Show(eventID);
+            clsShow show = new clsShow(eventID);
             show.Load(showID);
             txtShowName.Text = show.ShowName;
             ddlShowTypes.SelectedValue = show.ShowTypeID.ToString();
@@ -85,7 +84,7 @@ namespace nocf_entries.Admin
 
         private void LoadShowTypeList()
         {
-            List<ShowType> showTypeList = Show.GetShowTypeList();
+            List<ShowType> showTypeList = clsShow.GetShowTypeList();
 
             foreach (ShowType showType in showTypeList)
             {
@@ -102,7 +101,7 @@ namespace nocf_entries.Admin
                 int showID = 0;
                 int.TryParse(Request.QueryString["id"], out showID);
 
-                Show show = new Show(eventID);
+                clsShow show = new clsShow(eventID);
                 show.ShowID = showID;
                 show.ShowName = txtShowName.Text;
                 show.ShowTypeID = int.Parse(ddlShowTypes.SelectedValue);
@@ -147,7 +146,7 @@ namespace nocf_entries.Admin
         {
             int showID = 0;
             int.TryParse(Request.QueryString["id"], out showID);
-            rptrClasses.DataSource = ClassName.GetSelectedClassesForShow(showID);
+            rptrClasses.DataSource = clsClassName.GetSelectedClassesForShow(showID);
             rptrClasses.DataBind();
         }
 

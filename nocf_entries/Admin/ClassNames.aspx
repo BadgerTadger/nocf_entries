@@ -17,43 +17,23 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                        <tr>
-                            <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblClassName" 
-                                text='<%# Eval("Class_Name_Description") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblWeighting" 
-                                text='<%# Eval("Weighting") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Button runat="server" ID="btnEditClass" Text="View/Edit Class" UseSubmitBehavior="false" CommandName='<%# Eval("Class_Name_ID") %>' />
-                            </td>
-                        </tr>
+                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                <td>
+                                <asp:Label runat="server" ID="lblClassName" 
+                                    text='<%# Eval("Class_Name_Description") %>' />
+                                </td>
+                                <td>
+                                <asp:Label runat="server" ID="lblWeighting" 
+                                    text='<%# Eval("Weighting") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" ID="btnEditClass" Text="View/Edit Class" UseSubmitBehavior="false" CommandName='<%# Eval("Class_Name_ID") %>' />
+                                </td>
+                            </tr>
                         </ItemTemplate>
-
-                        <AlternatingItemTemplate>
-                        <tr>
-                            <td>
-                            <asp:Label runat="server" ID="lblClassName" 
-                                text='<%# Eval("Class_Name_Description") %>' />
-                            </td>
-                            <td>
-                            <asp:Label runat="server" ID="lblWeighting" 
-                                text='<%# Eval("Weighting") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblGender" text='<%# Eval("GenderDescr") %>' />
-                            </td>
-                            <td>
-                                <asp:Button runat="server" ID="btnEditClass" Text="View/Edit Class" UseSubmitBehavior="false" CommandName='<%# Eval("Class_Name_ID") %>' />
-                            </td>
-                        </tr>
-                        </AlternatingItemTemplate>
-
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>

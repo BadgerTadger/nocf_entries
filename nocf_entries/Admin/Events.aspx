@@ -7,59 +7,77 @@
     </p>
     <asp:PlaceHolder runat="server" ID="phList" Visible="false">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-12">
                 <div class="form-horizontal">
                     <h4>Event List</h4>
-                    <asp:Repeater ID="rptrEvents" runat="server" OnItemCommand="rptrEvents_ItemCommand" >
+                    <asp:Repeater ID="rptrEvents" runat="server" OnItemCommand="rptrEvents_ItemCommand" OnItemDataBound="rptrEvents_ItemDataBound" >
                         <HeaderTemplate>
                             <table>
+                        </HeaderTemplate>
+                        <ItemTemplate>
                             <tr>
                                 <th>Event Name</th>
                                 <th>Event Active?</th>
                                 <th></th>
                             </tr>
-                        </HeaderTemplate>
-
-                        <ItemTemplate>
-                        <tr>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblEventName" text='<%# Eval("EventName") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblEventActive" text='<%# (Eval("EventActive").ToString() == "True" ? "Yes" : "No") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Event" UseSubmitBehavior="false" CommandName='<%# Eval("EventID") %>' />
-                            </td>
-                        </tr>
+                            <tr class="eventName">
+                                <td>
+                                    <asp:Label runat="server" ID="lblEventName" text='<%# Eval("EventName") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblEventActive" text='<%# (Eval("EventActive").ToString() == "True" ? "Yes" : "No") %>' />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Event" UseSubmitBehavior="false" CommandName='<%# Eval("EventID") %>' />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="2">
+                                    <asp:Repeater ID="rptrShows" runat="server" OnItemCommand="rptrShows_ItemCommand" >
+                                        <HeaderTemplate>
+                                            <table>
+                                            <tr>
+                                                <th>Show Name</th>
+                                                <th>Show Type</th>
+                                                <th>Show Opens</th>
+                                                <th></th>
+                                            </tr>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                                <td>
+                                                    <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
+                                                </td>
+                                                <td>
+                                                    <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
+                                                </td>
+                                                <td>
+                                                    <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
+                                                </td>
+                                                <td>
+                                                    <asp:Button runat="server" ID="btnEditShow" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </table>
+                                            <hr />
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </td>
+                            </tr>
                         </ItemTemplate>
-
-                        <AlternatingItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:Label runat="server" ID="lblEventName" text='<%# Eval("EventName") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblEventActive" text='<%# (Eval("EventActive").ToString() == "True" ? "Yes" : "No") %>' />
-                            </td>
-                            <td>
-                                <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Event" UseSubmitBehavior="false" CommandName='<%# Eval("EventID") %>' />
-                            </td>
-                        </tr>
-                        </AlternatingItemTemplate>
-
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>
                     </asp:Repeater>
                 </div>
                 <div class="center-div">
+                    <br />
                     <asp:Button runat="server" ID="btnAddEvent" CssClass="btn btn-default" Text="Add an Event" OnClick="btnAddEvent_Click" />
                 </div>
             </div>
-            <hr />
-        </div>
-        <div class="form-group">
         </div>
     </asp:PlaceHolder>
 
@@ -96,41 +114,22 @@
                             <th></th>
                         </tr>
                     </HeaderTemplate>
-
                     <ItemTemplate>
-                    <tr>
-                        <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
-                        </td>
-                        <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
-                        </td>
-                        <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
-                        </td>
-                        <td bgcolor="#CCFFCC">
-                            <asp:Button runat="server" ID="btnEditShow" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
-                        </td>
-                    </tr>
+                        <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                            <td>
+                                <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
+                            </td>
+                            <td>
+                                <asp:Button runat="server" ID="btnEditShow" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
+                            </td>
+                        </tr>
                     </ItemTemplate>
-
-                    <AlternatingItemTemplate>
-                    <tr>
-                        <td>
-                            <asp:Label runat="server" ID="lblShowName" text='<%# Eval("ShowName") %>' />
-                        </td>
-                        <td>
-                            <asp:Label runat="server" ID="lblShowType" text='<%# Eval("ShowTypeDescription") %>' />
-                        </td>
-                        <td>
-                            <asp:Label runat="server" ID="lblShowOpens" text='<%# DateTime.Parse(Eval("ShowOpens").ToString()).ToString("dd/MM/yyyy HH:mm") %>' />
-                        </td>
-                        <td>
-                            <asp:Button runat="server" ID="btnEditEvent" Text="View/Edit Show" UseSubmitBehavior="false" CommandName='<%# Eval("ShowID") %>' />
-                        </td>
-                    </tr>
-                    </AlternatingItemTemplate>
-
                     <FooterTemplate>
                         </table>
                     </FooterTemplate>

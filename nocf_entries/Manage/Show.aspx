@@ -5,7 +5,7 @@
     </p>
     <asp:PlaceHolder runat="server" ID="phView" Visible="false">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-horizontal">
                     <h4>Show Details</h4>
                     <hr />
@@ -35,110 +35,46 @@
                             <asp:Label runat="server" ID="lblMaxClassesPerDog" />
                         </dd>
                     </dl>
-                </div>                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-horizontal">
-                            <h4>Entry Details</h4>
-                            <hr />
-                            <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="chkCatalogue" CssClass="col-md-6 control-label">Catalogue Required?</asp:Label>
-                                <div class="col-md-6">
-                                    <asp:CheckBox ID="chkCatalogue" runat="server" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="chkOvernightCamping" CssClass="col-md-6 control-label">Overnight Camping Required?</asp:Label>
-                                <div class="col-md-6">
-                                    <asp:CheckBox ID="chkOvernightCamping" runat="server" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="chkOfferOfHelp" CssClass="col-md-6 control-label">Can you help out at the Show?</asp:Label>
-                                <div class="col-md-6">
-                                    <asp:CheckBox ID="chkOfferOfHelp" runat="server" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="txtHelpDetails" CssClass="col-md-6 control-label">Details of help offered</asp:Label>
-                                <div class="col-md-6">
-                                    <asp:TextBox ID="txtHelpDetails" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="chkWitholdAddress" CssClass="col-md-6 control-label">Withold Address?</asp:Label>
-                                <div class="col-md-6">
-                                    <asp:CheckBox ID="chkWitholdAddress" runat="server" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-horizontal">
-                            <h4>Class List</h4>
-                            <asp:Repeater ID="rptrClasses" runat="server" OnItemCommand="rptrClasses_ItemCommand" >
-                                <HeaderTemplate>
-                                    <table>
-                                    <tr>
-                                        <th>Class Name</th>
-                                        <th>Class No</th>
-                                        <th>Class Cap</th>
-                                        <th>Judges</th>
-                                        <th></th>
-                                    </tr>
-                                </HeaderTemplate>
-
-                                <ItemTemplate>
-                                <tr>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Button runat="server" ID="btnEnterClass" Text="Enter This Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                                    </td>
-                                </tr>
-                                </ItemTemplate>
-                                <AlternatingItemTemplate>
-                                <tr>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Button runat="server" ID="btnEnterClass" Text="Enter This Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                                    </td>
-                                </tr>
-                                </AlternatingItemTemplate>
-
-                                <FooterTemplate>
-                                    </table>
-                                </FooterTemplate>
-                            </asp:Repeater>
-                        </div>
-                    </div>
-                    <hr />
                 </div>
             </div>
-            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    <h4>Entry Details</h4>
+                    <hr />
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="chkCatalogue" CssClass="col-md-6 control-label">Catalogue Required?</asp:Label>
+                        <div class="col-md-6">
+                            <asp:CheckBox ID="chkCatalogue" runat="server" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="chkOvernightCamping" CssClass="col-md-6 control-label">Overnight Camping Required?</asp:Label>
+                        <div class="col-md-6">
+                            <asp:CheckBox ID="chkOvernightCamping" runat="server" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="chkOfferOfHelp" CssClass="col-md-6 control-label">Can you help out at the Show?</asp:Label>
+                        <div class="col-md-6">
+                            <asp:CheckBox ID="chkOfferOfHelp" runat="server" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtHelpDetails" CssClass="col-md-6 control-label">Details of help offered</asp:Label>
+                        <div class="col-md-6">
+                            <asp:TextBox ID="txtHelpDetails" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="chkWitholdAddress" CssClass="col-md-6 control-label">Withold Address?</asp:Label>
+                        <div class="col-md-6">
+                            <asp:CheckBox ID="chkWitholdAddress" runat="server" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-horizontal">
                     <h4>Entered Classes</h4>
@@ -155,52 +91,68 @@
                                 <th></th>
                             </tr>
                         </HeaderTemplate>
-
                         <ItemTemplate>
-                        <tr>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblDogName" text='<%# Eval("KCName") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblPreferredPart" text='<%# Eval("PreferredPart") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblSpecialRequest" text='<%# Eval("SpecialRequest") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Button runat="server" ID="btnEditEntry" Text="Edit This Entry" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                            </td>
-                        </tr>
+                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                <td>
+                                    <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDogName" text='<%# Eval("KCName") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblPreferredPart" text='<%# Eval("PreferredPart") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblSpecialRequest" text='<%# Eval("SpecialRequest") %>' />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" ID="btnEditEntry" Text="Edit This Entry" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                </td>
+                            </tr>
                         </ItemTemplate>
-                        <AlternatingItemTemplate>
-                        <tr>
-                            <td>
-                                <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblDogName" text='<%# Eval("KCName") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblPreferredPart" text='<%# Eval("PreferredPart") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblSpecialRequest" text='<%# Eval("SpecialRequest") %>' />
-                            </td>
-                            <td>
-                                <asp:Button runat="server" ID="btnEditEntry" Text="Edit This Entry" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                            </td>
-                        </tr>
-                        </AlternatingItemTemplate>
-
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-horizontal">
+                    <h4>Available Classes</h4>
+                    <hr />
+                    <asp:Repeater ID="rptrClasses" runat="server" OnItemCommand="rptrClasses_ItemCommand" >
+                        <HeaderTemplate>
+                            <table>
+                            <tr>
+                                <th>Class Name</th>
+                                <th>Class No</th>
+                                <th>Class Cap</th>
+                                <th>Judges</th>
+                                <th></th>
+                            </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                <td>
+                                    <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" ID="btnEnterClass" Text="Enter This Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>
@@ -250,42 +202,23 @@
                                         <th>Special Request</th>
                                     </tr>
                                 </HeaderTemplate>
-
                                 <ItemTemplate>
-                                <tr>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:CheckBox ID="chkEnterDog" runat="server" />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblKCName" text='<%# Eval("KCName") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:HiddenField ID="hdnDogID" runat="server" Value='<%# Eval("DogID") %>' />
-                                        <asp:TextBox ID="txtPreferredPart" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:TextBox ID="txtSpecialRequest" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                    </td>
-                                </tr>
+                                    <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                        <td>
+                                            <asp:CheckBox ID="chkEnterDog" runat="server" />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblKCName" text='<%# Eval("KCName") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:HiddenField ID="hdnDogID" runat="server" Value='<%# Eval("DogID") %>' />
+                                            <asp:TextBox ID="txtPreferredPart" runat="server"></asp:TextBox>
+                                        </td>
+                                        <td>
+                                            <asp:TextBox ID="txtSpecialRequest" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                        </td>
+                                    </tr>
                                 </ItemTemplate>
-                                <AlternatingItemTemplate>
-                                <tr>
-                                    <td>
-                                        <asp:CheckBox ID="chkEnterDog" runat="server" />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblKCName" text='<%# Eval("KCName") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:HiddenField ID="hdnDogID" runat="server" Value='<%# Eval("DogID") %>' />
-                                        <asp:TextBox ID="txtPreferredPart" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtSpecialRequest" runat="server" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                </AlternatingItemTemplate>
-
                                 <FooterTemplate>
                                     </table>
                                 </FooterTemplate>

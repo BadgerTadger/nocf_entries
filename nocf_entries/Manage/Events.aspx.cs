@@ -64,11 +64,11 @@ namespace nocf_entries.Manage
             }
         }
 
-        private void PopulateMyShowList(int eventID, Repeater rptrShows)
+        private void PopulateMyShowList(int eventID, Repeater rptrMyShows)
         {
             clsShow show = new clsShow(eventID);
-            rptrShows.DataSource = show.GetMyShowList(_owner.ID);
-            rptrShows.DataBind();
+            rptrMyShows.DataSource = show.GetMyShowList(_owner.ID);
+            rptrMyShows.DataBind();
         }
 
         private void PopulateShowList(int eventID, Repeater rptrShows)
@@ -97,11 +97,51 @@ namespace nocf_entries.Manage
             if (e.Item.ItemType == ListItemType.Item ||
                      e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                Repeater rptrShows = (Repeater)e.Item.FindControl("rptrShows");
+                Repeater rptrMyShows = (Repeater)e.Item.FindControl("rptrMyShows");
                 int eventID = 0;
                 int.TryParse(DataBinder.Eval(e.Item.DataItem, "EventID").ToString(), out eventID);
-                PopulateMyShowList(eventID, rptrShows);
+                PopulateMyShowList(eventID, rptrMyShows);
             }
+        }
+
+        protected void rptrMyShows_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                     e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Repeater rptrMyClasses = (Repeater)e.Item.FindControl("rptrMyClasses");
+                int showID = 0;
+                int.TryParse(DataBinder.Eval(e.Item.DataItem, "ShowID").ToString(), out showID);
+                PopulateMyClassList(showID, rptrMyClasses);
+            }
+        }
+
+        private void PopulateMyClassList(int showID, Repeater rptrMyClasses)
+        {
+            int entryID = 0;
+            clsEntry entry = new clsEntry(_owner.ID);
+            if (entry.LoadByShowID(showID))
+            {
+                entryID = entry.EntryID;
+            }
+            clsDogClass dogClass = new clsDogClass(entryID);
+            rptrMyClasses.DataSource = dogClass.GetEnteredClasses();
+            rptrMyClasses.DataBind();
+        }
+
+        protected void rptrMyClasses_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int eventID = 0;
+            int.TryParse(Request.QueryString["eventid"], out eventID);
+            int showID = 0;
+            int.TryParse(Request.QueryString["showid"], out showID);
+            clsEntry entry = new clsEntry(_owner.ID);
+            int entryID = 0;
+            if (entry.LoadByShowID(showID))
+            {
+                entryID = entry.EntryID;
+            }
+            Response.Redirect("~/Manage/Show?mode=e&eventid=" + eventID + "&showid=" + showID + "&entryid=" + entryID + "&classid=" + e.CommandName);
         }
     }
 }

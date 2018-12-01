@@ -320,7 +320,7 @@ namespace nocf_entries.App_Code
                           INNER JOIN lkpClass_Names cn ON sc.Class_Name_ID = cn.Class_Name_ID
                           AND sc.ShowClassID = dc.ShowClassID
                           WHERE e.EntryID = @EntryID
-                          ORDER BY Weighting, ClassNo";
+                          ORDER BY Weighting, ClassNo, KCName";
 
             cn = new SqlConnection(_connString);
             cn.Open();

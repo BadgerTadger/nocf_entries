@@ -130,15 +130,6 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.CheckBox chkWitholdAddress;
         
         /// <summary>
-        /// rptrClasses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptrClasses;
-        
-        /// <summary>
         /// rptrEnteredClasses control.
         /// </summary>
         /// <remarks>
@@ -146,6 +137,15 @@ namespace nocf_entries.Manage {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptrEnteredClasses;
+        
+        /// <summary>
+        /// rptrClasses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptrClasses;
         
         /// <summary>
         /// Button2 control.

@@ -281,7 +281,8 @@ namespace nocf_entries.App_Code
                         inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
                         INNER JOIN tblEntries en ON s.ShowID = en.ShowID
                         AND OwnerID = @OwnerID
-                        WHERE EventID = @EventID";
+                        WHERE EventID = @EventID
+                        ORDER BY ShowID";
                 
             cn = new SqlConnection(_connString);
             cn.Open();

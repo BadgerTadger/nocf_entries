@@ -54,44 +54,24 @@
                                 </HeaderTemplate>
 
                                 <ItemTemplate>
-                                <tr>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
-                                    </td>
-                                    <td bgcolor="#CCFFCC">
-                                        <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                                    </td>
-                                </tr>
+                                    <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
+                                        </td>
+                                    </tr>
                                 </ItemTemplate>
-                                <AlternatingItemTemplate>
-                                <tr>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassNameDescription" text='<%# Eval("Class_Name_Description") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassNo" text='<%# Eval("ClassNo") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
-                                    </td>
-                                    <td>
-                                        <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
-                                    </td>
-                                </tr>
-                                </AlternatingItemTemplate>
-
                                 <FooterTemplate>
                                     </table>
                                 </FooterTemplate>

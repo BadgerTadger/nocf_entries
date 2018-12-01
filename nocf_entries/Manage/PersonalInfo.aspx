@@ -85,55 +85,29 @@
                                 <th></th>
                             </tr>
                         </HeaderTemplate>
-
                         <ItemTemplate>
-                        <tr>
-                            <td bgcolor="#CCFFCC">
-                            <asp:Label runat="server" ID="lblPetName" 
-                                text='<%# Eval("PetName") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblBreed" 
-                                    text='<%# Eval("Breed") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblGender" 
-                                    text='<%# Eval("Gender") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Label runat="server" ID="lblDOB" 
-                                    text='<%# DateTime.Parse(Eval("DateOfBirth").ToString()).ToString("dd/MM/yyyy") %>' />
-                            </td>
-                            <td bgcolor="#CCFFCC">
-                                <asp:Button runat="server" ID="btnEditDog" Text="View/Edit Dog" UseSubmitBehavior="false" CommandName='<%# Eval("DogID") %>' />
-                            </td>
-                        </tr>
+                            <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
+                                <td>
+                                <asp:Label runat="server" ID="lblPetName" 
+                                    text='<%# Eval("PetName") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblBreed" 
+                                        text='<%# Eval("Breed") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblGender" 
+                                        text='<%# Eval("Gender") %>' />
+                                </td>
+                                <td>
+                                    <asp:Label runat="server" ID="lblDOB" 
+                                        text='<%# DateTime.Parse(Eval("DateOfBirth").ToString()).ToString("dd/MM/yyyy") %>' />
+                                </td>
+                                <td>
+                                    <asp:Button runat="server" ID="btnEditDog" Text="View/Edit Dog" UseSubmitBehavior="false" CommandName='<%# Eval("DogID") %>' />
+                                </td>
+                            </tr>
                         </ItemTemplate>
-
-                        <AlternatingItemTemplate>
-                        <tr>
-                            <td>
-                            <asp:Label runat="server" ID="lblPetName" 
-                                text='<%# Eval("PetName") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblBreed" 
-                                    text='<%# Eval("Breed") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblGender" 
-                                    text='<%# Eval("Gender") %>' />
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblDOB" 
-                                    text='<%# DateTime.Parse(Eval("DateOfBirth").ToString()).ToString("dd/MM/yyyy") %>' />
-                            </td>
-                            <td>
-                                <asp:Button runat="server" ID="btnEditDog" Text="View/Edit Dog" UseSubmitBehavior="false" CommandName='<%# Eval("DogID") %>' />
-                            </td>
-                        </tr>
-                        </AlternatingItemTemplate>
-
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>

@@ -114,5 +114,24 @@ namespace nocf_entries.Admin
             int.TryParse(Request.QueryString["id"], out eventID);
             Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&mode=a", true);
         }
+
+        protected void rptrEvents_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                     e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Repeater rptrShows = (Repeater)e.Item.FindControl("rptrShows");
+                int eventID = 0;
+                int.TryParse(DataBinder.Eval(e.Item.DataItem, "EventID").ToString(), out eventID);
+                PopulateShowList(eventID, rptrShows);
+            }
+        }
+
+        private void PopulateShowList(int eventID, Repeater rptrShows)
+        {
+            clsShow show = new clsShow(eventID);
+            rptrShows.DataSource = show.GetShowList();
+            rptrShows.DataBind();
+        }
     }
 }

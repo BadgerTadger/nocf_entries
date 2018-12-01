@@ -2,7 +2,7 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: blanchedalmond;
+    background-color: lightgreen;
 }
 
 /* Wrapping element */
@@ -30,17 +30,33 @@ input[type="select"] {
 
 .btn {
     color: #ffffff;
-    background-color: #333333;
+    background-color: green;
     border-color: #ffffff;
 }
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {
         margin-top: 20px;
-        background-color: #999999;
+        background-color: aquamarine;
     }
 
     .body-content {
         padding: 0;
     }
+}
+
+.rptrTemplate {
+    background-color: slategrey ; color: black;
+}
+
+.rptrAltTemplate {
+    background-color: lightgray; color: black;
+}
+
+.eventName {
+    background-color: cornflowerblue;
+}
+
+.showName {
+    background-color: cadetblue;
 }

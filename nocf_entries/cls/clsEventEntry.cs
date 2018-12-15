@@ -224,29 +224,37 @@ namespace nocf_entries.App_Code
         internal bool LoadByShowID(int showID)
         {
             bool retVal = false;
-            _eventID = showID;
 
             try
             {
-                string sqlCmd = @"SELECT EventEntryID
-                              ,WitholdAddress
-                              ,SendRunningOrder
-                              ,SendCatalogue
-                              ,CatalogueCost
-                              ,CampingOptionID
-                              ,VehicleReg
-                              ,Overpayment
-                              ,Underpayment
-                              ,EventSpecialRequest
-                          FROM tblEventEntries
-                          WHERE OwnerID = @OwnerID AND EventID = @EventID";
+                string sqlCmd = @"SELECT ShowEntryID
+                                ,ee.EventEntryID
+                                ,ShowID
+                                ,OfferOfHelp
+                                ,HelpDetails
+                                ,EntryDate
+                                ,ShowSpecialRequest
+                                ,OwnerID
+                                ,EventID
+                                ,WitholdAddress
+                                ,SendRunningOrder
+                                ,SendCatalogue
+                                ,CatalogueCost
+                                ,CampingOptionID
+                                ,VehicleReg
+                                ,Overpayment
+                                ,Underpayment
+                                ,EventSpecialRequest
+                            FROM tblEventEntries ee INNER JOIN tblShowEntries se
+                            ON ee.EventEntryID = se.EventEntryID
+                            WHERE OwnerID = @OwnerID AND ShowID = @ShowID";
 
                 cn = new SqlConnection(_connString);
                 cn.Open();
                 SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
                 adr.SelectCommand.CommandType = CommandType.Text;
                 adr.SelectCommand.Parameters.AddWithValue("@OwnerID", _ownerID);
-                adr.SelectCommand.Parameters.AddWithValue("@EventID", _eventID);
+                adr.SelectCommand.Parameters.AddWithValue("@ShowID", showID);
                 DataSet ds = new DataSet();
                 adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
                 if (ds.Tables[0].Rows.Count > 0)
@@ -262,8 +270,10 @@ namespace nocf_entries.App_Code
                     _overpayment = decimal.Parse(ds.Tables[0].Rows[0]["Overpayment"].ToString());
                     _underpayment = decimal.Parse(ds.Tables[0].Rows[0]["Underpayment"].ToString());
                     _eventSpecialRequest = ds.Tables[0].Rows[0]["EventSpecialRequest"].ToString();
+                    int showEntryID = int.Parse(ds.Tables[0].Rows[0]["EventEntryID"].ToString());
                     clsShowEntry showEntry = new clsShowEntry(_eventEntryID);
-                    _showEntryList = showEntry.GetShowEntriesForEventEntry();
+                    showEntry.Load(showEntryID);
+                    _showEntryList.Add(showEntry);
                 }
             }
             catch (Exception ex)

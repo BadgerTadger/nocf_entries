@@ -93,9 +93,9 @@ namespace nocf_entries.Manage
             clsEventEntry eventEntry = new clsEventEntry(_owner.OwnerID);
             if (eventEntry.LoadByShowID(showID))
             {
-                chkCatalogue.Checked = eventEntry.Catalogue;
+                chkCatalogue.Checked = eventEntry.SendCatalogue;
                 chkOvernightCamping.Checked = eventEntry.OvernightCamping;
-                chkOfferOfHelp.Checked = eventEntry.OfferOfHelp;
+                chkOfferOfHelp.Checked = eventEntry.ShowEntryList[0].OfferOfHelp;
                 txtHelpDetails.Text = eventEntry.VehicleReg;
                 chkWitholdAddress.Checked = eventEntry.WitholdAddress;
             }

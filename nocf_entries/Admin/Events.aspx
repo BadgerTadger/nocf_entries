@@ -91,7 +91,7 @@
                 <div class="col-md-10">
                     <asp:TextBox runat="server" ID="txtEventName" CssClass="form-control" TextMode="SingleLine" />
                     <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtEventName"
-                        CssClass="text-danger" ErrorMessage="The First name field is required." />
+                        CssClass="text-danger" ErrorMessage="The Event Name field is required." />
                 </div>
             </div>
             <div class="form-group">

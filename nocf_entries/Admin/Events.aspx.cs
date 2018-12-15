@@ -23,7 +23,7 @@ namespace nocf_entries.Admin
                 if (!Page.IsPostBack)
                 {
                     int eventID = 0;
-                    int.TryParse(Request.QueryString["id"], out eventID);
+                    int.TryParse(Request.QueryString["eventid"], out eventID);
 
 
                     mode = Request.QueryString["Mode"] == null ? "" : Request.QueryString["Mode"].ToString().ToLowerInvariant();
@@ -41,6 +41,7 @@ namespace nocf_entries.Admin
                             phEdit.Visible = true;
                             break;
                         default:
+                            if (eventID > 0) PopulateEditFields(eventID);
                             PopulateEventList();
                             phList.Visible = true;
                             phEdit.Visible = false;
@@ -48,6 +49,11 @@ namespace nocf_entries.Admin
                     }
                 }
             }
+        }
+
+        private void PopulateViewFields(int eventID)
+        {
+            throw new NotImplementedException();
         }
 
         private void PopulateEventList()
@@ -78,22 +84,31 @@ namespace nocf_entries.Admin
 
         protected void rptrEvents_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("~/Admin/Events?mode=e&id=" + e.CommandName);
+            Response.Redirect("~/Admin/Events?mode=e&eventid=" + e.CommandName);
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (IsValid)
             {
-                int eventID = 0;
-                int.TryParse(Request.QueryString["id"], out eventID);
-                clsEvent showEvent = new clsEvent();
-                showEvent.EventID = eventID;
-                showEvent.EventName = txtEventName.Text;
-                showEvent.EventActive = chkEventActive.Checked;
-                showEvent.Save();
-                Response.Redirect("~/Admin/Events");
+                int eventID = SaveEvent();
+                if (ErrorMessage.Text.Length == 0)
+                {
+                    Response.Redirect("~/Admin/Events?eventid=" + eventID);
+                }
             }
+        }
+
+        private int SaveEvent()
+        {
+            int eventID = 0;
+            int.TryParse(Request.QueryString["eventid"], out eventID);
+            clsEvent showEvent = new clsEvent();
+            showEvent.EventID = eventID;
+            showEvent.EventName = txtEventName.Text;
+            showEvent.EventActive = chkEventActive.Checked;
+            ErrorMessage.Text = showEvent.Save();
+            return showEvent.EventID;
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
@@ -103,16 +118,20 @@ namespace nocf_entries.Admin
 
         protected void rptrShows_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int eventID = 0;
-            int.TryParse(Request.QueryString["id"], out eventID);
-            Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&id=" + e.CommandName);
+            int eventID = SaveEvent();
+            if (ErrorMessage.Text.Length == 0)
+            {
+                Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&showid=" + e.CommandName);
+            }
         }
 
         protected void btnAddShow_Click(object sender, EventArgs e)
         {
-            int eventID = 0;
-            int.TryParse(Request.QueryString["id"], out eventID);
-            Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&mode=a", true);
+            int eventID = SaveEvent();
+            if (ErrorMessage.Text.Length == 0)
+            {
+                Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&mode=a", true);
+            }
         }
 
         protected void rptrEvents_ItemDataBound(object sender, RepeaterItemEventArgs e)

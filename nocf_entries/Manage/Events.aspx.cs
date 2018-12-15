@@ -46,7 +46,7 @@ namespace nocf_entries.Manage
 
         private void PopulateViewFields(string userid)
         {
-            rptrMyEvents.DataSource = clsEvent.GetMyEventList(_owner.ID);
+            rptrMyEvents.DataSource = clsEvent.GetMyEventList(_owner.OwnerID);
             rptrMyEvents.DataBind();
             rptrUpcomingEvents.DataSource = clsEvent.GetUpcomingEventList(true);
             rptrUpcomingEvents.DataBind();
@@ -67,7 +67,7 @@ namespace nocf_entries.Manage
         private void PopulateMyShowList(int eventID, Repeater rptrMyShows)
         {
             clsShow show = new clsShow(eventID);
-            rptrMyShows.DataSource = show.GetMyShowList(_owner.ID);
+            rptrMyShows.DataSource = show.GetMyShowList(_owner.OwnerID);
             rptrMyShows.DataBind();
         }
 
@@ -83,13 +83,13 @@ namespace nocf_entries.Manage
             HiddenField hdnEventID = e.Item.FindControl("hdnEventID") as HiddenField;
             int eventID = 0;
             int.TryParse(hdnEventID.Value, out eventID);
-            clsEntry entry = new clsEntry(_owner.ID);
-            int entryID = 0;
-            if (entry.LoadByShowID(int.Parse(e.CommandName)))
+            clsEventEntry eventEntry = new clsEventEntry(_owner.OwnerID);
+            int eventEntryID = 0;
+            if (eventEntry.LoadByEventID(int.Parse(e.CommandName)))
             {
-                entryID = entry.EntryID;
+                eventEntryID = eventEntry.EventEntryID;
             }
-            Response.Redirect("~/Manage/Show?eventid=" + eventID + "&entryid=" + entryID + "&showid=" + e.CommandName);
+            Response.Redirect("~/Manage/Show?eventid=" + eventID + "&evententryid=" + eventEntryID + "&showid=" + e.CommandName);
         }
 
         protected void rptrMyEvents_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -118,13 +118,13 @@ namespace nocf_entries.Manage
 
         private void PopulateMyClassList(int showID, Repeater rptrMyClasses)
         {
-            int entryID = 0;
-            clsEntry entry = new clsEntry(_owner.ID);
-            if (entry.LoadByShowID(showID))
+            int eventEntryID = 0;
+            clsEventEntry eventEntry = new clsEventEntry(_owner.OwnerID);
+            if (eventEntry.LoadByShowID(showID))
             {
-                entryID = entry.EntryID;
+                eventEntryID = eventEntry.EventEntryID;
             }
-            clsDogClass dogClass = new clsDogClass(entryID);
+            clsDogClass dogClass = new clsDogClass(eventEntryID);
             rptrMyClasses.DataSource = dogClass.GetEnteredClasses();
             rptrMyClasses.DataBind();
         }
@@ -135,11 +135,11 @@ namespace nocf_entries.Manage
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            clsEntry entry = new clsEntry(_owner.ID);
+            clsEventEntry entry = new clsEventEntry(_owner.OwnerID);
             int entryID = 0;
             if (entry.LoadByShowID(showID))
             {
-                entryID = entry.EntryID;
+                entryID = entry.EventEntryID;
             }
             Response.Redirect("~/Manage/Show?mode=e&eventid=" + eventID + "&showid=" + showID + "&entryid=" + entryID + "&classid=" + e.CommandName);
         }

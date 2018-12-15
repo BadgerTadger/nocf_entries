@@ -57,7 +57,7 @@ namespace nocf_entries.Manage
             lblClassNameDescription.Text = row["Class_Name_Description"].ToString();
             lblClassNo.Text = row["ClassNo"].ToString();
             lblJudges.Text = row["Judges"].ToString();
-            clsDog dog = new clsDog(_owner.ID);
+            clsDog dog = new clsDog(_owner.OwnerID);
             rptrDogs.DataSource = dog.GetDogList();
             rptrDogs.DataBind();
         }
@@ -72,7 +72,7 @@ namespace nocf_entries.Manage
             lblJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             lblClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
             lblMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
-            LoadEntryDetails(showID);
+            LoadShowEntryDetails(showID);
             LoadSelectedClasses();
             LoadEnteredClasses();
         }
@@ -86,18 +86,18 @@ namespace nocf_entries.Manage
             rptrEnteredClasses.DataBind();
         }
 
-        private void LoadEntryDetails(int showID)
+        private void LoadShowEntryDetails(int showID)
         {
-            int entryID = 0;
-            int.TryParse(Request.QueryString["entryid"], out entryID);
-            clsEntry entry = new clsEntry(_owner.ID);
-            if (entry.LoadByShowID(showID))
+            int eventEntryID = 0;
+            int.TryParse(Request.QueryString["evententryid"], out eventEntryID);
+            clsEventEntry eventEntry = new clsEventEntry(_owner.OwnerID);
+            if (eventEntry.LoadByShowID(showID))
             {
-                chkCatalogue.Checked = entry.Catalogue;
-                chkOvernightCamping.Checked = entry.OvernightCamping;
-                chkOfferOfHelp.Checked = entry.OfferOfHelp;
-                txtHelpDetails.Text = entry.HelpDetails;
-                chkWitholdAddress.Checked = entry.WitholdAddress;
+                chkCatalogue.Checked = eventEntry.Catalogue;
+                chkOvernightCamping.Checked = eventEntry.OvernightCamping;
+                chkOfferOfHelp.Checked = eventEntry.OfferOfHelp;
+                txtHelpDetails.Text = eventEntry.VehicleReg;
+                chkWitholdAddress.Checked = eventEntry.WitholdAddress;
             }
         }
 
@@ -115,11 +115,11 @@ namespace nocf_entries.Manage
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            clsEntry entry = new clsEntry(_owner.ID);
+            clsEventEntry entry = new clsEventEntry(_owner.OwnerID);
             int entryID = 0;
             if (entry.LoadByShowID(showID))
             {
-                entryID = entry.EntryID;
+                entryID = entry.EventEntryID;
             }
             else
             {
@@ -141,13 +141,13 @@ namespace nocf_entries.Manage
         {
             int entryID = 0;
             int.TryParse(Request.QueryString["entryid"], out entryID);
-            clsEntry entry = new clsEntry(_owner.ID);
-            entry.EntryID = entryID;
+            clsEventEntry entry = new clsEventEntry(_owner.OwnerID);
+            entry.EventEntryID = entryID;
             entry.ShowID = showID;
             entry.Catalogue = chkCatalogue.Checked;
             entry.OvernightCamping = chkOvernightCamping.Checked;
             entry.OfferOfHelp = chkOfferOfHelp.Checked;
-            entry.HelpDetails = txtHelpDetails.Text;
+            entry.VehicleReg = txtHelpDetails.Text;
             entry.WitholdAddress = chkWitholdAddress.Checked;
             entry.SendRunningOrder = false;
             entry.EntryDate = DateTime.Now;
@@ -264,11 +264,11 @@ namespace nocf_entries.Manage
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            clsEntry entry = new clsEntry(_owner.ID);
+            clsEventEntry entry = new clsEventEntry(_owner.OwnerID);
             int entryID = 0;
             if (entry.LoadByShowID(showID))
             {
-                entryID = entry.EntryID;
+                entryID = entry.EventEntryID;
             }
             else
             {

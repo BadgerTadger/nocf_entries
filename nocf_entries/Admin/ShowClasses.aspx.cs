@@ -22,7 +22,7 @@ namespace nocf_entries.Admin
                 if (!Page.IsPostBack)
                 {
                     int showClassID = 0;
-                    int.TryParse(Request.QueryString["id"], out showClassID);
+                    int.TryParse(Request.QueryString["showclassid"], out showClassID);
 
                     PopulateEditFields(showClassID);
                     phEdit.Visible = true;
@@ -64,7 +64,7 @@ namespace nocf_entries.Admin
                 int showID = 0;
                 int.TryParse(Request.QueryString["showid"], out showID);
                 int showClassID = 0;
-                int.TryParse(Request.QueryString["id"], out showClassID);
+                int.TryParse(Request.QueryString["showclassid"], out showClassID);
                 ShowClass sc = new ShowClass(showClassID);
                 sc.ShowID = showID;
                 sc.ClassNameID = int.Parse(hdnClassNameID.Value);
@@ -77,7 +77,7 @@ namespace nocf_entries.Admin
 
                 int eventID = 0;
                 int.TryParse(Request.QueryString["eventid"], out eventID);
-                Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&id=" + showID, true);
+                Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&showid=" + showID, true);
             }
         }
 
@@ -87,7 +87,7 @@ namespace nocf_entries.Admin
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&id=" + showID, true);
+            Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&showid=" + showID, true);
         }
     }
 }

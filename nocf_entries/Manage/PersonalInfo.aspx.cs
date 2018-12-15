@@ -53,7 +53,7 @@ namespace nocf_entries.Manage
             lblEmail.Text = owner.Email;
             lblPhone.Text = owner.Phone;
             lblMobile.Text = owner.Mobile;
-            clsDog dog = new clsDog(owner.ID);
+            clsDog dog = new clsDog(owner.OwnerID);
             rptrDogs.DataSource = dog.GetDogList();
             rptrDogs.DataBind();
         }
@@ -158,7 +158,7 @@ namespace nocf_entries.Manage
 
         protected void rptrDogs_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("~/Manage/Dogs.aspx?id=" + e.CommandName);
+            Response.Redirect("~/Manage/Dogs.aspx?dogid=" + e.CommandName);
         }
     }
 }

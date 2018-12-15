@@ -27,7 +27,7 @@ namespace nocf_entries.Admin
                     int eventID = 0;
                     int.TryParse(Request.QueryString["eventid"], out eventID);
                     int showID = 0;
-                    int.TryParse(Request.QueryString["id"], out showID);
+                    int.TryParse(Request.QueryString["showid"], out showID);
 
                     _mode = Request.QueryString["Mode"] == null ? "" : Request.QueryString["Mode"].ToString().ToLowerInvariant();
                     switch (_mode)
@@ -84,9 +84,9 @@ namespace nocf_entries.Admin
 
         private void LoadShowTypeList()
         {
-            List<ShowType> showTypeList = clsShow.GetShowTypeList();
+            List<clsShowType> showTypeList = clsShowType.GetShowTypeList();
 
-            foreach (ShowType showType in showTypeList)
+            foreach (clsShowType showType in showTypeList)
             {
                 ddlShowTypes.Items.Add(new ListItem(showType.ShowTypeDescription, showType.ShowTypeID.ToString()));
             }
@@ -99,7 +99,7 @@ namespace nocf_entries.Admin
                 int eventID = 0;
                 int.TryParse(Request.QueryString["eventid"], out eventID);
                 int showID = 0;
-                int.TryParse(Request.QueryString["id"], out showID);
+                int.TryParse(Request.QueryString["showid"], out showID);
 
                 clsShow show = new clsShow(eventID);
                 show.ShowID = showID;
@@ -108,9 +108,11 @@ namespace nocf_entries.Admin
                 show.ShowOpens = DateTime.ParseExact(txtShowOpens.Text, "dd/MM/yyyy HH:mm", null);
                 show.JudgingCommences = DateTime.ParseExact(txtJudgingCommences.Text, "dd/MM/yyyy HH:mm", null);
                 show.ClosingDate = DateTime.ParseExact(txtClosingDate.Text, "dd/MM/yyyy", null);
-                show.MaxClassesPerDog = int.Parse(txtMaxClassesPerDog.Text);
+                int maxClassesPerDog = 0;
+                int.TryParse(txtMaxClassesPerDog.Text, out maxClassesPerDog);
+                show.MaxClassesPerDog = maxClassesPerDog;
                 show.Save();
-                Response.Redirect("~/Admin/Events?mode=e&id=" + eventID);
+                Response.Redirect("~/Admin/Events?mode=e&eventid=" + eventID);
             }
         }
 
@@ -118,7 +120,7 @@ namespace nocf_entries.Admin
         {
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
-            Response.Redirect("~/Admin/Events?mode=e&id=" + eventID);
+            Response.Redirect("~/Admin/Events?mode=e&eventid=" + eventID);
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -126,8 +128,8 @@ namespace nocf_entries.Admin
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
-            int.TryParse(Request.QueryString["id"], out showID);
-            Response.Redirect("~/Admin/Shows?mode=e&eventid=" + eventID + "&id=" + showID.ToString(), true);
+            int.TryParse(Request.QueryString["showid"], out showID);
+            Response.Redirect("~/Admin/Shows?mode=e&eventid=" + eventID + "&showid=" + showID.ToString(), true);
         }
 
         protected void DateFormatValidator_ServerValidate(object source, ServerValidateEventArgs args)
@@ -145,7 +147,7 @@ namespace nocf_entries.Admin
         private void LoadSelectedClasses()
         {
             int showID = 0;
-            int.TryParse(Request.QueryString["id"], out showID);
+            int.TryParse(Request.QueryString["showid"], out showID);
             rptrClasses.DataSource = clsClassName.GetSelectedClassesForShow(showID);
             rptrClasses.DataBind();
         }
@@ -155,8 +157,8 @@ namespace nocf_entries.Admin
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
-            int.TryParse(Request.QueryString["id"], out showID);
-            Response.Redirect("~/Admin/ShowClasses?eventid=" + eventID + "&showid=" + showID + "&id=" + e.CommandName);
+            int.TryParse(Request.QueryString["showid"], out showID);
+            Response.Redirect("~/Admin/ShowClasses?eventid=" + eventID + "&showid=" + showID + "&showclassid=" + e.CommandName);
         }
 
         protected void btnSelectClasses_Click(object sender, EventArgs e)
@@ -164,7 +166,7 @@ namespace nocf_entries.Admin
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
-            int.TryParse(Request.QueryString["id"], out showID);
+            int.TryParse(Request.QueryString["showid"], out showID);
             Response.Redirect("~/Admin/ClassNames?mode=s&eventid=" + eventID + "&showid=" + showID);
         }
     }

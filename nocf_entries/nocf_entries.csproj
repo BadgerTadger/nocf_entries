@@ -390,12 +390,14 @@
     <Compile Include="Admin\Shows.aspx.designer.cs">
       <DependentUpon>Shows.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Code\clsClassName.cs" />
-    <Compile Include="App_Code\clsDog.cs" />
-    <Compile Include="App_Code\clsDogClass.cs" />
-    <Compile Include="App_Code\clsEntry.cs" />
-    <Compile Include="App_Code\clsEvent.cs" />
-    <Compile Include="App_Code\clsShow.cs" />
+    <Compile Include="cls\clsClassName.cs" />
+    <Compile Include="cls\clsDog.cs" />
+    <Compile Include="cls\clsDogClass.cs" />
+    <Compile Include="cls\clsShowEntry.cs" />
+    <Compile Include="cls\clsEventEntry.cs" />
+    <Compile Include="cls\clsEvent.cs" />
+    <Compile Include="cls\clsShow.cs" />
+    <Compile Include="cls\clsShowType.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -453,7 +455,7 @@
       <DependentUpon>Show.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="App_Code\clsOwner.cs" />
+    <Compile Include="cls\clsOwner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -478,7 +480,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -24,7 +24,7 @@ namespace nocf_entries.Admin
                 if (!Page.IsPostBack)
                 {
                     int classNameID = 0;
-                    int.TryParse(Request.QueryString["id"], out classNameID);
+                    int.TryParse(Request.QueryString["classnameid"], out classNameID);
                     int showID = 0;
                     int.TryParse(Request.QueryString["showid"], out showID);
 
@@ -122,7 +122,7 @@ namespace nocf_entries.Admin
             if (IsValid)
             {
                 int classNameID = 0;
-                int.TryParse(Request.QueryString["id"], out classNameID);
+                int.TryParse(Request.QueryString["classnameid"], out classNameID);
                 clsClassName className = new clsClassName();
                 className.Class_Name_ID = classNameID;
                 className.Class_Name_Description = txtClassName.Text;
@@ -140,7 +140,7 @@ namespace nocf_entries.Admin
 
         protected void rptrClassNames_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("~/Admin/ClassNames?mode=e&id=" + e.CommandName);
+            Response.Redirect("~/Admin/ClassNames?mode=e&classnameid=" + e.CommandName);
         }
 
         protected void btnSaveSelection_Click(object sender, EventArgs e)
@@ -157,12 +157,12 @@ namespace nocf_entries.Admin
                 CheckBox chk = ri.FindControl("chkClassName") as CheckBox;
                 if (chk.Checked)
                 {
-                    int classNo = 0;
+                    int classNo = -1;
                     TextBox txtClassNo = ri.FindControl("txtClassNo") as TextBox;
                     int.TryParse(txtClassNo.Text.ToString(), out classNo);
 
                     Label lblError = ri.FindControl("lblError") as Label;
-                    if (classNo == 0)
+                    if (classNo == -1)
                     {
                         lblError.Text = "Class Number is Required";
                         isError = true;
@@ -196,15 +196,11 @@ namespace nocf_entries.Admin
                         TextBox txtClassNo = ri.FindControl("txtClassNo") as TextBox;
                         int.TryParse(txtClassNo.Text.ToString(), out classNo);
 
-                        int gender = 0;
-                        DropDownList ddl = ri.FindControl("ddlGender") as DropDownList;
-                        int.TryParse(ddl.SelectedValue.ToString(), out gender);
-
-                        clsClassName.SaveSelected(showClassID, showID, classNameID, classNo, gender);
+                        clsClassName.SaveSelected(showClassID, showID, classNameID, classNo);
                     }
                 }
 
-                Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&id=" + showID);
+                Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&showid=" + showID);
             }
         }
 
@@ -246,7 +242,7 @@ namespace nocf_entries.Admin
             int.TryParse(Request.QueryString["eventid"], out eventID);
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&id=" + showID);
+            Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&showid=" + showID);
         }
 
         protected void ClassWeightingFormatValidator_ServerValidate(object source, ServerValidateEventArgs args)

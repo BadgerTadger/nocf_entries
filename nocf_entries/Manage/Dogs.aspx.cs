@@ -26,7 +26,7 @@ namespace nocf_entries.Manage
             if (!Page.IsPostBack)
             {
                 int _dogID = 0;
-                int.TryParse(Request.QueryString["id"], out _dogID);
+                int.TryParse(Request.QueryString["dogid"], out _dogID);
 
                 _mode = Request.QueryString["Mode"] == null ? "" : Request.QueryString["Mode"].ToString().ToLowerInvariant();
                 switch (_mode)
@@ -55,7 +55,7 @@ namespace nocf_entries.Manage
 
         private void PopulateEditFields(int dogID)
         {
-            clsDog _dog = new clsDog(_owner.ID);
+            clsDog _dog = new clsDog(_owner.OwnerID);
             _dog.Load(dogID);
             txtPetName.Text = _dog.PetName;
             txtKCName.Text = _dog.KCName;
@@ -86,7 +86,7 @@ namespace nocf_entries.Manage
 
         private void PopulateViewFields(int dogID)
         {
-            clsDog _dog = new clsDog(_owner.ID);
+            clsDog _dog = new clsDog(_owner.OwnerID);
             _dog.Load(dogID);
             lblPetName.Text = _dog.PetName;
             lblKCName.Text = _dog.KCName;
@@ -113,9 +113,9 @@ namespace nocf_entries.Manage
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             int _dogID = 0;
-            if (int.TryParse(Request.QueryString["id"], out _dogID))
+            if (int.TryParse(Request.QueryString["dogid"], out _dogID))
             {
-                Response.Redirect("~/Manage/Dogs?mode=e&id=" + _dogID.ToString(), true);
+                Response.Redirect("~/Manage/Dogs?mode=e&dogid=" + _dogID.ToString(), true);
             }
         }
 
@@ -124,10 +124,10 @@ namespace nocf_entries.Manage
             if(IsValid)
             {
                 int _dogID = 0;
-                int.TryParse(Request.QueryString["id"], out _dogID);
-                clsDog _dog = new clsDog(_owner.ID);
+                int.TryParse(Request.QueryString["dogid"], out _dogID);
+                clsDog _dog = new clsDog(_owner.OwnerID);
                 _dog.DogID = _dogID;
-                _dog.OwnerID = _owner.ID;
+                _dog.OwnerID = _owner.OwnerID;
                 _dog.KCName = txtKCName.Text;
                 _dog.PetName = txtPetName.Text;
                 _dog.BreedID = int.Parse(ddlBreeds.SelectedValue);

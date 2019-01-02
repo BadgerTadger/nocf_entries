@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using nocf_entries.App_Code;
+using nocf_entries.cls;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -52,7 +52,7 @@ namespace nocf_entries.Manage
 
         private void PopulateEnterFields(int eventID, int showID, int classID)
         {
-            DataTable dt = clsClassName.GetShowClassByID(classID);
+            DataTable dt = clsShowClass.GetShowClassByID(classID);
             DataRow row = dt.Rows[0];
             lblClassNameDescription.Text = row["Class_Name_Description"].ToString();
             lblClassNo.Text = row["ClassNo"].ToString();
@@ -94,7 +94,7 @@ namespace nocf_entries.Manage
             if (eventEntry.LoadByShowID(showID))
             {
                 chkCatalogue.Checked = eventEntry.SendCatalogue;
-                chkOvernightCamping.Checked = eventEntry.OvernightCamping;
+                ddlCampingOptions.SelectedValue = eventEntry.CampingOptionID.ToString();
                 chkOfferOfHelp.Checked = eventEntry.ShowEntryList[0].OfferOfHelp;
                 txtHelpDetails.Text = eventEntry.VehicleReg;
                 chkWitholdAddress.Checked = eventEntry.WitholdAddress;
@@ -105,7 +105,7 @@ namespace nocf_entries.Manage
         {
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            rptrClasses.DataSource = clsClassName.GetSelectedClassesForShow(showID);
+            rptrClasses.DataSource = clsShowClass.GetSelectedClassesForShow(showID);
             rptrClasses.DataBind();
         }
 
@@ -139,21 +139,24 @@ namespace nocf_entries.Manage
 
         private int SaveEntry(int showID)
         {
-            int entryID = 0;
-            int.TryParse(Request.QueryString["entryid"], out entryID);
-            clsEventEntry entry = new clsEventEntry(_owner.OwnerID);
-            entry.EventEntryID = entryID;
-            entry.ShowID = showID;
-            entry.Catalogue = chkCatalogue.Checked;
-            entry.OvernightCamping = chkOvernightCamping.Checked;
-            entry.OfferOfHelp = chkOfferOfHelp.Checked;
-            entry.VehicleReg = txtHelpDetails.Text;
-            entry.WitholdAddress = chkWitholdAddress.Checked;
-            entry.SendRunningOrder = false;
-            entry.EntryDate = DateTime.Now;
-            entryID = entry.Save();
+            int eventEntryID = 0;
+            int.TryParse(Request.QueryString["evententryid"], out eventEntryID);
+            clsEventEntry eventEntry = new clsEventEntry(_owner.OwnerID);
+            clsShowEntry showEntry = new clsShowEntry();
+            eventEntry.EventEntryID = eventEntryID;
+            showEntry.ShowID = showID;
+            eventEntry.SendCatalogue = chkCatalogue.Checked;
+            eventEntry.CampingOptionID = int.Parse(ddlCampingOptions.SelectedValue);
+            showEntry.OfferOfHelp = chkOfferOfHelp.Checked;
+            eventEntry.VehicleReg = txtHelpDetails.Text;
+            eventEntry.WitholdAddress = chkWitholdAddress.Checked;
+            eventEntry.SendRunningOrder = false;
+            showEntry.EntryDate = DateTime.Now;
+            eventEntryID = eventEntry.Save();
+            showEntry.EventEntryID = eventEntryID;
+            showEntry.Save();
 
-            return entryID;
+            return eventEntryID;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)

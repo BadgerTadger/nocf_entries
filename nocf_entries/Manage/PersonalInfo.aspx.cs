@@ -6,7 +6,7 @@ using System.Xml;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.SqlClient;
-using nocf_entries.App_Code;
+using nocf_entries.cls;
 
 namespace nocf_entries.Manage
 {

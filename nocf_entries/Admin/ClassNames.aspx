@@ -15,7 +15,6 @@
                                 <th></th>
                             </tr>
                         </HeaderTemplate>
-
                         <ItemTemplate>
                             <tr class='<%# Container.ItemIndex % 2 == 0 ? "rptrTemplate" : "rptrAltTemplate" %>'>
                                 <td>
@@ -81,6 +80,7 @@
                     <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
                 </div>
             </div>
+        </div>
     </asp:PlaceHolder>
     <asp:PlaceHolder runat="server" ID="phSelect" Visible="false">
         <div class="row">
@@ -102,6 +102,9 @@
                                 <td>
                                     <asp:HiddenField ID="hdnShowClassID" Value='<%# Eval("ShowClassID") %>' runat="server" />
                                     <asp:HiddenField ID="hdnClassNameID" Value='<%# Eval("Class_Name_ID") %>' runat="server" />
+                                    <asp:HiddenField ID="hdnDefaultClassCost" Value='<%# Eval("DefaultClassCost") %>' runat="server" />
+                                    <asp:HiddenField ID="hdnDefaultClassCap" Value='<%# Eval("DefaultClassCap") %>' runat="server" />
+                                    <asp:HiddenField ID="hdnDefaultDogsPerClassPart" Value='<%# Eval("DefaultDogsPerClassPart") %>' runat="server" />
                                     <asp:TextBox ID="txtClassNo" Text='<%# Eval("ClassNo") %>' runat="server" /><br />
                                     <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                                 </td>

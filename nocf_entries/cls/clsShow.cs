@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace nocf_entries.App_Code
+namespace nocf_entries.cls
 {
     public class clsShow
     {
@@ -69,11 +69,32 @@ namespace nocf_entries.App_Code
             set { _closingDate = value; }
         }
 
+        private decimal _defaultClassCost;
+        public decimal DefaultClassCost
+        {
+            get { return _defaultClassCost; }
+            set { _defaultClassCost = value; }
+        }
+
         private int _maxClassesPerDog;
         public int MaxClassesPerDog
         {
             get { return _maxClassesPerDog; }
             set { _maxClassesPerDog = value; }
+        }
+
+        private int _maxDogsPerClass;
+        public int MaxDogsPerClass
+        {
+            get { return _maxDogsPerClass; }
+            set { _maxDogsPerClass = value; }
+        }
+
+        private int _defaultDogsPerClassPart;
+        public int DefaultDogsPerClassPart
+        {
+            get { return _defaultDogsPerClassPart; }
+            set { _defaultDogsPerClassPart = value; }
         }
 
         public clsShow()
@@ -98,17 +119,19 @@ namespace nocf_entries.App_Code
                         ,ShowOpens
                         ,JudgingCommences
                         ,ClosingDate
+                        ,DefaultClassCost
                         ,MaxClassesPerDog
+                        ,MaxDogsPerClass
+                        ,DefaultDogsPerClassPart
                         FROM tblShows s
                         inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
-                        WHERE ShowID = @ShowID AND EventID = @EventID";
+                        WHERE ShowID = @ShowID";
 
                 cn = new SqlConnection(_connString);
                 cn.Open();
                 SqlDataAdapter adr = new SqlDataAdapter(sqlCmd, cn);
                 adr.SelectCommand.CommandType = CommandType.Text;
                 adr.SelectCommand.Parameters.AddWithValue("@ShowID", _showID);
-                adr.SelectCommand.Parameters.AddWithValue("@EventID", _eventID);
                 DataSet ds = new DataSet();
                 adr.Fill(ds); //opens and closes the DB connection automatically !! (fetches from pool)
                 if (ds.Tables[0].Rows.Count > 0)
@@ -120,7 +143,10 @@ namespace nocf_entries.App_Code
                         _showOpens = DateTime.Parse(ds.Tables[0].Rows[0]["ShowOpens"].ToString());
                         _judgingCommences = DateTime.Parse(ds.Tables[0].Rows[0]["JudgingCommences"].ToString());
                         _closingDate = DateTime.Parse(ds.Tables[0].Rows[0]["ClosingDate"].ToString());
+                        _defaultClassCost = decimal.Parse(ds.Tables[0].Rows[0]["DefaultClassCost"].ToString());
                         _maxClassesPerDog = int.Parse(ds.Tables[0].Rows[0]["MaxClassesPerDog"].ToString());
+                        _maxDogsPerClass = int.Parse(ds.Tables[0].Rows[0]["MaxDogsPerClass"].ToString());
+                        _defaultDogsPerClassPart = int.Parse(ds.Tables[0].Rows[0]["DefaultDogsPerClassPart"].ToString());
                     }
 
                 }
@@ -142,15 +168,18 @@ namespace nocf_entries.App_Code
                 string sqlCmd = "";
                 if (_showID == 0)
                 {
-                    sqlCmd = @"INSERT INTO [dbo].[tblShows]
-                       ([ShowID]
-                       ,[EventID]
-                       ,[ShowTypeID]
-                       ,[ShowName]
-                       ,[ShowOpens]
-                       ,[JudgingCommences]
-                       ,[ClosingDate]
-                       ,[MaxClassesPerDog])
+                    sqlCmd = @"INSERT INTO tblShows
+                       (ShowID
+                       ,EventID
+                       ,ShowTypeID
+                       ,ShowName
+                       ,ShowOpens
+                       ,JudgingCommences
+                       ,ClosingDate
+                       ,DefaultClassCost
+                       ,MaxClassesPerDog
+                       ,MaxDogsPerClass
+                       ,DefaultDogsPerClassPart)
                  VALUES
                        (@ShowID
                        ,@EventID
@@ -159,18 +188,24 @@ namespace nocf_entries.App_Code
                        ,@ShowOpens
                        ,@JudgingCommences
                        ,@ClosingDate
-                       ,@MaxClassesPerDog)";
+                       ,@DefaultClassCost
+                       ,@MaxClassesPerDog
+                       ,@MaxDogsPerClass
+                       ,@DefaultDogsPerClassPart)";
                 }
                 else
                 {
-                    sqlCmd = @"UPDATE [dbo].[tblShows]
-                   SET [EventID] = @EventID
-                      ,[ShowTypeID] = @ShowTypeID
-                      ,[ShowName] = @ShowName
-                      ,[ShowOpens] = @ShowOpens
-                      ,[JudgingCommences] = @JudgingCommences
-                      ,[ClosingDate] = @ClosingDate
-                      ,[MaxClassesPerDog] = @MaxClassesPerDog
+                    sqlCmd = @"UPDATE tblShows
+                   SET EventID = @EventID
+                      ,ShowTypeID = @ShowTypeID
+                      ,ShowName = @ShowName
+                      ,ShowOpens = @ShowOpens
+                      ,JudgingCommences = @JudgingCommences
+                      ,ClosingDate = @ClosingDate
+                      ,DefaultClassCost = @DefaultClassCost
+                      ,MaxClassesPerDog = @MaxClassesPerDog
+                      ,MaxDogsPerClass = @MaxDogsPerClass
+                      ,DefaultDogsPerClassPart = @DefaultDogsPerClassPart
                     WHERE ShowID = @ShowID";
                 }
 
@@ -188,7 +223,10 @@ namespace nocf_entries.App_Code
                 command.Parameters.AddWithValue("@ShowOpens", _showOpens);
                 command.Parameters.AddWithValue("@JudgingCommences", _judgingCommences);
                 command.Parameters.AddWithValue("@ClosingDate", _closingDate);
+                command.Parameters.AddWithValue("@DefaultClassCost", _defaultClassCost);
                 command.Parameters.AddWithValue("@MaxClassesPerDog", _maxClassesPerDog);
+                command.Parameters.AddWithValue("@MaxDogsPerClass", _maxDogsPerClass);
+                command.Parameters.AddWithValue("@DefaultDogsPerClassPart", _defaultDogsPerClassPart);
                 command.ExecuteNonQuery();
                 cn.Close();
             }
@@ -244,7 +282,10 @@ namespace nocf_entries.App_Code
                     ,ShowOpens
                     ,JudgingCommences
                     ,ClosingDate
+                    ,DefaultClassCost
                     ,MaxClassesPerDog
+                    ,MaxDogsPerClass
+                    ,DefaultDogsPerClassPart
                     FROM tblShows s
                     inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
                     WHERE EventID = @EventID";
@@ -276,7 +317,10 @@ namespace nocf_entries.App_Code
                         ,ShowOpens
                         ,JudgingCommences
                         ,ClosingDate
+                        ,DefaultClassCost
                         ,MaxClassesPerDog
+                        ,MaxDogsPerClass
+                        ,DefaultDogsPerClassPart
                         FROM tblShows s
                         inner join lkpShowTypes st on s.ShowTypeID = st.ShowTypeID 
                         INNER JOIN tblShowEntries se ON s.ShowID = se.ShowID

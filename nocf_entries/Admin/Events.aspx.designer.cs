@@ -76,6 +76,24 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.CheckBox chkEventActive;
         
         /// <summary>
+        /// txtCatalogueCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCatalogueCost;
+        
+        /// <summary>
+        /// txtPostage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPostage;
+        
+        /// <summary>
         /// rptrShows control.
         /// </summary>
         /// <remarks>

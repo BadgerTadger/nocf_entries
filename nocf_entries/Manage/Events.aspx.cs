@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using nocf_entries.App_Code;
+using nocf_entries.cls;
 using System;
 using System.Collections.Generic;
 using System.Linq;

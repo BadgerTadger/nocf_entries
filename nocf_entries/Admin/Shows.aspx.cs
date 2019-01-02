@@ -1,4 +1,4 @@
-﻿using nocf_entries.App_Code;
+﻿using nocf_entries.cls;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -64,7 +64,10 @@ namespace nocf_entries.Admin
             lblShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy HH:mm");
             lblJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             lblClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
+            lblDefaultClassCost.Text = show.DefaultClassCost.ToString("0.##");
             lblMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
+            lblMaxDogsPerClass.Text = show.MaxDogsPerClass.ToString();
+            lblDefaultDogsPerClassPart.Text = show.DefaultDogsPerClassPart.ToString();
             LoadSelectedClasses();
         }
 
@@ -79,7 +82,10 @@ namespace nocf_entries.Admin
             txtShowOpens.Text = show.ShowOpens.ToString("dd/MM/yyyy HH:mm");
             txtJudgingCommences.Text = show.JudgingCommences.ToString("dd/MM/yyyy HH:mm");
             txtClosingDate.Text = show.ClosingDate.ToString("dd/MM/yyyy");
+            txtDefaultClassCost.Text = show.DefaultClassCost.ToString("0.##");
             txtMaxClassesPerDog.Text = show.MaxClassesPerDog.ToString();
+            txtMaxDogsPerClass.Text = show.MaxDogsPerClass.ToString();
+            txtDefaultDogsPerClassPart.Text = show.DefaultDogsPerClassPart.ToString();
         }
 
         private void LoadShowTypeList()
@@ -108,19 +114,30 @@ namespace nocf_entries.Admin
                 show.ShowOpens = DateTime.ParseExact(txtShowOpens.Text, "dd/MM/yyyy HH:mm", null);
                 show.JudgingCommences = DateTime.ParseExact(txtJudgingCommences.Text, "dd/MM/yyyy HH:mm", null);
                 show.ClosingDate = DateTime.ParseExact(txtClosingDate.Text, "dd/MM/yyyy", null);
+                decimal defaultClassCost = 0;
+                decimal.TryParse(txtDefaultClassCost.Text, out defaultClassCost);
+                show.DefaultClassCost = defaultClassCost;
                 int maxClassesPerDog = 0;
                 int.TryParse(txtMaxClassesPerDog.Text, out maxClassesPerDog);
                 show.MaxClassesPerDog = maxClassesPerDog;
+                int maxDogsPerClass = 0;
+                int.TryParse(txtMaxDogsPerClass.Text, out maxDogsPerClass);
+                show.MaxDogsPerClass = maxDogsPerClass;
+                int defaultDogsPerClassPart = 0;
+                int.TryParse(txtDefaultDogsPerClassPart.Text, out defaultDogsPerClassPart);
+                show.DefaultDogsPerClassPart = defaultDogsPerClassPart;
                 show.Save();
                 Response.Redirect("~/Admin/Events?mode=e&eventid=" + eventID);
             }
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
+        protected void btnCancelEdit_Click(object sender, EventArgs e)
         {
             int eventID = 0;
             int.TryParse(Request.QueryString["eventid"], out eventID);
-            Response.Redirect("~/Admin/Events?mode=e&eventid=" + eventID);
+            int showID = 0;
+            int.TryParse(Request.QueryString["showid"], out showID);
+            Response.Redirect("~/Admin/Shows?eventid=" + eventID + "&showid=" + showID);
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)
@@ -148,7 +165,7 @@ namespace nocf_entries.Admin
         {
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
-            rptrClasses.DataSource = clsClassName.GetSelectedClassesForShow(showID);
+            rptrClasses.DataSource = clsShowClass.GetSelectedClassesForShow(showID, false);
             rptrClasses.DataBind();
         }
 
@@ -168,6 +185,27 @@ namespace nocf_entries.Admin
             int showID = 0;
             int.TryParse(Request.QueryString["showid"], out showID);
             Response.Redirect("~/Admin/ClassNames?mode=s&eventid=" + eventID + "&showid=" + showID);
+        }
+
+        protected void MoneyFormatValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            bool argsValid = true;
+            if (!string.IsNullOrEmpty(args.Value))
+            {
+                decimal amount = 0;
+                if (!decimal.TryParse(args.Value, out amount))
+                {
+                    argsValid = false;
+                }
+            }
+            args.IsValid = argsValid;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            int eventID = 0;
+            int.TryParse(Request.QueryString["eventid"], out eventID);
+            Response.Redirect("~/Admin/Events?eventid=" + eventID);
         }
     }
 }

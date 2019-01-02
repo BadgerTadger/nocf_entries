@@ -1,4 +1,4 @@
-﻿using nocf_entries.App_Code;
+﻿using nocf_entries.cls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +75,8 @@ namespace nocf_entries.Admin
             showEvent.Load(eventID);
             txtEventName.Text = showEvent.EventName;
             chkEventActive.Checked = showEvent.EventActive;
+            txtCatalogueCost.Text = showEvent.CatalogueCost.ToString();
+            txtPostage.Text = showEvent.Postage.ToString();
         }
 
         protected void btnAddEvent_Click(object sender, EventArgs e)
@@ -107,6 +109,12 @@ namespace nocf_entries.Admin
             showEvent.EventID = eventID;
             showEvent.EventName = txtEventName.Text;
             showEvent.EventActive = chkEventActive.Checked;
+            decimal catalogueCost = 0;
+            decimal.TryParse(txtCatalogueCost.Text, out catalogueCost);
+            showEvent.CatalogueCost = catalogueCost;
+            decimal postage = 0;
+            decimal.TryParse(txtPostage.Text, out postage);
+            showEvent.Postage = postage;
             ErrorMessage.Text = showEvent.Save();
             return showEvent.EventID;
         }
@@ -118,7 +126,14 @@ namespace nocf_entries.Admin
 
         protected void rptrShows_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int eventID = SaveEvent();
+            HiddenField hdnEventID = e.Item.FindControl("hdnEventID") as HiddenField;
+            int eventID = 0;
+            int.TryParse(hdnEventID.Value, out eventID);
+            HiddenField hdnIsEdit = e.Item.FindControl("hdnIsEdit") as HiddenField;
+            if (hdnIsEdit.Value == "true")
+            {
+                eventID = SaveEvent();
+            }
             if (ErrorMessage.Text.Length == 0)
             {
                 Response.Redirect("~/Admin/Shows.aspx?eventid=" + eventID + "&showid=" + e.CommandName);
@@ -151,6 +166,35 @@ namespace nocf_entries.Admin
             clsShow show = new clsShow(eventID);
             rptrShows.DataSource = show.GetShowList();
             rptrShows.DataBind();
+        }
+
+        protected void rptrShows_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                     e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Repeater rptrClasses = (Repeater)e.Item.FindControl("rptrClasses");
+                int showID = 0;
+                int.TryParse(DataBinder.Eval(e.Item.DataItem, "ShowID").ToString(), out showID);
+                PopulateShowClassList(showID, rptrClasses);
+            }
+        }
+
+        private void PopulateShowClassList(int showID, Repeater rptrClasses)
+        {
+            rptrClasses.DataSource = clsShowClass.GetSelectedClassesForShow(showID, false);
+            rptrClasses.DataBind();
+        }
+
+        protected void rptrClasses_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            HiddenField hdnEventID = e.Item.FindControl("hdnEventID") as HiddenField;
+            int eventID = 0;
+            int.TryParse(hdnEventID.Value, out eventID);
+            HiddenField hdnShowID = e.Item.FindControl("hdnShowID") as HiddenField;
+            int showID = 0;
+            int.TryParse(hdnShowID.Value, out showID);
+            Response.Redirect("~/Admin/ShowClasses?eventid=" + eventID + "&showid=" + showID + "&showclassid=" + e.CommandName);
         }
     }
 }

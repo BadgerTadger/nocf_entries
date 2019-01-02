@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using nocf_entries.App_Code;
+using nocf_entries.cls;
 
 namespace nocf_entries.Admin
 {
@@ -61,7 +61,9 @@ namespace nocf_entries.Admin
 
         private void PopulateClassList(int showID)
         {
-            DataTable classList = clsClassName.GetClassesForSelection(showID);
+            clsShow show = new clsShow();
+            show.Load(showID);
+            DataTable classList = clsClassName.GetClassesForSelection(show);
             rptrClasses.DataSource = classList;
             rptrClasses.DataBind();
         }
@@ -151,9 +153,20 @@ namespace nocf_entries.Admin
             int.TryParse(Request.QueryString["showid"], out showID);
             bool isError = false;
 
+            decimal defaultClassCost = 0;
+            int defaultClassCap = 0;
+            int defaultDogsPerClassPart = 0;
+
             //Validate
             foreach (RepeaterItem ri in rptrClasses.Items)
             {
+                HiddenField hdnDefaultClassCost = ri.FindControl("hdnDefaultClassCost") as HiddenField;
+                decimal.TryParse(hdnDefaultClassCost.Value, out defaultClassCost);
+                HiddenField hdnDefaultClassCap = ri.FindControl("hdnDefaultClassCap") as HiddenField;
+                int.TryParse(hdnDefaultClassCap.Value, out defaultClassCap);
+                HiddenField hdnDefaultDogsPerClassPart = ri.FindControl("hdnDefaultDogsPerClassPart") as HiddenField;
+                int.TryParse(hdnDefaultDogsPerClassPart.Value, out defaultDogsPerClassPart);
+
                 CheckBox chk = ri.FindControl("chkClassName") as CheckBox;
                 if (chk.Checked)
                 {
@@ -177,7 +190,15 @@ namespace nocf_entries.Admin
             //Save
             if (!isError)
             {
-                clsClassName.DeleteClassesForShow(showID);
+                clsShowClass.DeleteClassesForShow(showID);
+
+                clsShowClass showClass = new clsShowClass();
+                showClass.ClassCost = defaultClassCost;
+                showClass.ClassCap = 9999;
+                showClass.DogsPerClassPart = 0;
+                showClass.Judges = "N/A";
+                showClass.AddNFC(showID);
+                
 
                 foreach (RepeaterItem ri in rptrClasses.Items)
                 {
@@ -196,7 +217,12 @@ namespace nocf_entries.Admin
                         TextBox txtClassNo = ri.FindControl("txtClassNo") as TextBox;
                         int.TryParse(txtClassNo.Text.ToString(), out classNo);
 
-                        clsClassName.SaveSelected(showClassID, showID, classNameID, classNo);
+                        showClass = new clsShowClass();
+                        showClass.Judges = "";
+                        showClass.ClassCost = defaultClassCost;
+                        showClass.ClassCap = defaultClassCap;
+                        showClass.DogsPerClassPart = defaultDogsPerClassPart;
+                        showClass.SaveSelected(showClassID, showID, classNameID, classNo);
                     }
                 }
 

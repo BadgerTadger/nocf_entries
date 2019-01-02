@@ -48,9 +48,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="chkOvernightCamping" CssClass="col-md-6 control-label">Overnight Camping Required?</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="ddlCampingOptions" CssClass="col-md-6 control-label">Camping Option</asp:Label>
                         <div class="col-md-6">
-                            <asp:CheckBox ID="chkOvernightCamping" runat="server" />
+                            <asp:DropDownList ID="ddlCampingOptions" runat="server"></asp:DropDownList>
                         </div>
                     </div>
                     <div class="form-group">

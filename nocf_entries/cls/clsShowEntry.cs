@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace nocf_entries.App_Code
+namespace nocf_entries.cls
 {
     public class clsShowEntry
     {
@@ -63,6 +63,10 @@ namespace nocf_entries.App_Code
             set { _showSpecialRequest = value; }
         }
 
+        public clsShowEntry()
+        {
+
+        }
 
         public clsShowEntry(int eventEntryID)
         {

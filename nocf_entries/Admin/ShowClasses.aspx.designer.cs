@@ -85,6 +85,42 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.CustomValidator ClassCapFormatValidator;
         
         /// <summary>
+        /// txtDogsPerClassPart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDogsPerClassPart;
+        
+        /// <summary>
+        /// DogsPerClassPartValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator DogsPerClassPartValidator;
+        
+        /// <summary>
+        /// txtClassCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClassCost;
+        
+        /// <summary>
+        /// ClassCostValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator ClassCostValidator;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>

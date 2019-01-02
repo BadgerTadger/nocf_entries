@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace nocf_entries.App_Code
+namespace nocf_entries.cls
 {
     public class clsEvent
     {
@@ -34,6 +34,20 @@ namespace nocf_entries.App_Code
             set { _eventActive = value; }
         }
 
+        private decimal _catalogueCost;
+        public decimal CatalogueCost
+        {
+            get { return _catalogueCost; }
+            set { _catalogueCost = value; }
+        }
+
+        private decimal _postage;
+        public decimal Postage
+        {
+            get { return _postage; }
+            set { _postage = value; }
+        }
+
         public clsEvent()
         {
 
@@ -45,7 +59,7 @@ namespace nocf_entries.App_Code
 
             try
             {
-                string sqlCmd = @"SELECT [EventID],[EventName],[EventActive]
+                string sqlCmd = @"SELECT EventID,EventName,EventActive,CatalogueCost,Postage
                 FROM tblEvents WHERE EventID = @EventID";
 
                 cn = new SqlConnection(_connString);
@@ -60,6 +74,8 @@ namespace nocf_entries.App_Code
                     {
                         _eventName = ds.Tables[0].Rows[0]["EventName"].ToString();
                         _eventActive = ds.Tables[0].Rows[0]["EventActive"].ToString() == "True";
+                        _catalogueCost = decimal.Parse(ds.Tables[0].Rows[0]["CatalogueCost"].ToString());
+                        _postage = decimal.Parse(ds.Tables[0].Rows[0]["Postage"].ToString());
                     }
 
                 }
@@ -125,15 +141,17 @@ namespace nocf_entries.App_Code
                     _eventID = GetNextEventID();
 
                     sqlCmd = @"INSERT INTO tblEvents
-                        (EventID,EventName,EventActive)
+                        (EventID,EventName,EventActive,CatalogueCost,Postage)
                         VALUES
-                        (@EventID, @EventName,@EventActive)";
+                        (@EventID, @EventName,@EventActive,@CatalogueCost,@Postage)";
                 }
                 else
                 {
                     sqlCmd = @"UPDATE tblEvents
                         SET EventName = @EventName,
-                        EventActive = @EventActive
+                        EventActive = @EventActive,
+                        CatalogueCost = @CatalogueCost,
+                        Postage = @Postage
                         WHERE EventID = @EventID";
                 }
 
@@ -143,6 +161,8 @@ namespace nocf_entries.App_Code
                 command.Parameters.AddWithValue("@EventID", _eventID);
                 command.Parameters.AddWithValue("@EventName", _eventName);
                 command.Parameters.AddWithValue("@EventActive", _eventActive);
+                command.Parameters.AddWithValue("@CatalogueCost", _catalogueCost);
+                command.Parameters.AddWithValue("@Postage", _postage);
                 command.ExecuteNonQuery();
                 cn.Close();
             }

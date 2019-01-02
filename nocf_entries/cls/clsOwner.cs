@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace nocf_entries.App_Code
+namespace nocf_entries.cls
 {
     public class clsOwner
     {

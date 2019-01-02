@@ -76,6 +76,15 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.Label lblClosingDate;
         
         /// <summary>
+        /// lblDefaultClassCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDefaultClassCost;
+        
+        /// <summary>
         /// lblMaxClassesPerDog control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,24 @@ namespace nocf_entries.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMaxClassesPerDog;
+        
+        /// <summary>
+        /// lblMaxDogsPerClass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxDogsPerClass;
+        
+        /// <summary>
+        /// lblDefaultDogsPerClassPart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDefaultDogsPerClassPart;
         
         /// <summary>
         /// rptrClasses control.
@@ -112,13 +139,13 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.Button btnEdit;
         
         /// <summary>
-        /// Button1 control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
         /// phEdit control.
@@ -202,6 +229,24 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.CustomValidator ClosingDateFormatValidator;
         
         /// <summary>
+        /// txtDefaultClassCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDefaultClassCost;
+        
+        /// <summary>
+        /// DefaultClassCostFormatValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator DefaultClassCostFormatValidator;
+        
+        /// <summary>
         /// txtMaxClassesPerDog control.
         /// </summary>
         /// <remarks>
@@ -209,6 +254,24 @@ namespace nocf_entries.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMaxClassesPerDog;
+        
+        /// <summary>
+        /// txtMaxDogsPerClass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaxDogsPerClass;
+        
+        /// <summary>
+        /// txtDefaultDogsPerClassPart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDefaultDogsPerClassPart;
         
         /// <summary>
         /// btnSave control.
@@ -220,12 +283,12 @@ namespace nocf_entries.Admin {
         protected global::System.Web.UI.WebControls.Button btnSave;
         
         /// <summary>
-        /// btnCancel control.
+        /// btnCancelEdit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancel;
+        protected global::System.Web.UI.WebControls.Button btnCancelEdit;
     }
 }

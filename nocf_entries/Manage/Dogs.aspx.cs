@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using nocf_entries.App_Code;
+using nocf_entries.cls;
 
 namespace nocf_entries.Manage
 {

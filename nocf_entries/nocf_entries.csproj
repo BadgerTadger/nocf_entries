@@ -393,6 +393,7 @@
     <Compile Include="cls\clsClassName.cs" />
     <Compile Include="cls\clsDog.cs" />
     <Compile Include="cls\clsDogClass.cs" />
+    <Compile Include="cls\clsShowClass.cs" />
     <Compile Include="cls\clsShowEntry.cs" />
     <Compile Include="cls\clsEventEntry.cs" />
     <Compile Include="cls\clsEvent.cs" />

@@ -31,9 +31,21 @@
                         <dd>
                             <asp:Label runat="server" ID="lblClosingDate" />
                         </dd>
+                        <dt>Default Class Cost:</dt>
+                        <dd>
+                            <asp:Label runat="server" ID="lblDefaultClassCost" />
+                        </dd>
                         <dt>Max Classes Per Dog:</dt>
                         <dd>
                             <asp:Label runat="server" ID="lblMaxClassesPerDog" />
+                        </dd>
+                        <dt>Max Dogs Per Class:</dt>
+                        <dd>
+                            <asp:Label runat="server" ID="lblMaxDogsPerClass" />
+                        </dd>
+                        <dt>Max Dogs Per Class Part:</dt>
+                        <dd>
+                            <asp:Label runat="server" ID="lblDefaultDogsPerClassPart" />
                         </dd>
                     </dl>
                 </div>                
@@ -48,7 +60,9 @@
                                         <th>Class Name</th>
                                         <th>Class No</th>
                                         <th>Class Cap</th>
+                                        <th>Dogs Per Class Part</th>
                                         <th>Judges</th>
+                                        <th>Class Cost</th>
                                         <th></th>
                                     </tr>
                                 </HeaderTemplate>
@@ -65,7 +79,13 @@
                                             <asp:Label runat="server" ID="lblClassCap" text='<%# Eval("ClassCap") %>' />
                                         </td>
                                         <td>
+                                            <asp:Label runat="server" ID="lblDogsPerClassPart" text='<%# Eval("DogsPerClassPart") %>' />
+                                        </td>
+                                        <td>
                                             <asp:Label runat="server" ID="lblJudges" text='<%# Eval("Judges") %>' />
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblClassCost" text='<%# Eval("ClassCost") %>' />
                                         </td>
                                         <td>
                                             <asp:Button runat="server" ID="btnEditClass" Text="Edit Show Class" UseSubmitBehavior="false" CommandName='<%# Eval("ShowClassID") %>' />
@@ -85,7 +105,7 @@
                 </div>
                 <div class="center-div">
                     <asp:Button runat="server" ID="btnEdit" CssClass="btn btn-default" Text="Edit This Show" OnClick="btnEdit_Click" />
-                    <asp:Button runat="server" CausesValidation="false" ID="Button1" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
+                    <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
                 </div>
             </div>
         </div>
@@ -144,15 +164,36 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtDefaultClassCost" CssClass="col-md-2 control-label">* Default Class Cost</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="txtDefaultClassCost" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtDefaultClassCost"
+                                CssClass="text-danger" ErrorMessage="The Default Class Cost field is required." />
+                            <asp:CustomValidator ID="DefaultClassCostFormatValidator" runat="server" ControlToValidate="txtDefaultClassCost" ErrorMessage="Default Class Cost must be a valid amount" OnServerValidate="MoneyFormatValidator_ServerValidate" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="txtMaxClassesPerDog" CssClass="col-md-2 control-label">Max Classes Per Dog</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="txtMaxClassesPerDog" CssClass="form-control" TextMode="SingleLine" />
                         </div>
                     </div>
                     <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtMaxDogsPerClass" CssClass="col-md-2 control-label">Max Dogs Per Class</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="txtMaxDogsPerClass" CssClass="form-control" TextMode="SingleLine" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtDefaultDogsPerClassPart" CssClass="col-md-2 control-label">Max Dogs Per Class Part</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="txtDefaultDogsPerClassPart" CssClass="form-control" TextMode="SingleLine" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" ID="btnSave" CssClass="btn btn-default" Text="Save" OnClick="btnSave_Click" />&nbsp;
-                            <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />
+                            <asp:Button runat="server" CausesValidation="false" ID="btnCancelEdit" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancelEdit_Click" />
                         </div>
                     </div>
                 </div>

@@ -94,13 +94,13 @@ namespace nocf_entries.Manage {
         protected global::System.Web.UI.WebControls.CheckBox chkCatalogue;
         
         /// <summary>
-        /// chkOvernightCamping control.
+        /// ddlCampingOptions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkOvernightCamping;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCampingOptions;
         
         /// <summary>
         /// chkOfferOfHelp control.

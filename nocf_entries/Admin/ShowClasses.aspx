@@ -38,6 +38,23 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtDogsPerClassPart" CssClass="col-md-2 control-label">Dogs Per Class Part</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="txtDogsPerClassPart" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:CustomValidator ID="DogsPerClassPartValidator" runat="server" ControlToValidate="txtDogsPerClassPart" ErrorMessage="Dogs Per Class Part must be empty or a number greater than 0" OnServerValidate="DogsPerClassPartValidator_ServerValidate" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <asp:Label runat="server" AssociatedControlID="txtClassCost" CssClass="col-md-2 control-label">Class Cost</asp:Label>
+                        <div class="col-md-10">
+                            <asp:TextBox runat="server" ID="txtClassCost" CssClass="form-control" TextMode="SingleLine" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtClassCost"
+                                CssClass="text-danger" ErrorMessage="The Class Cost field is required."
+                                ValidationGroup="ChangePassword" />
+                            <asp:CustomValidator ID="ClassCostValidator" runat="server" ControlToValidate="txtClassCost" ErrorMessage="Class Cost must be a valid amount" OnServerValidate="ClassCostValidator_ServerValidate" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <asp:Button runat="server" ID="btnSave" CssClass="btn btn-default" Text="Save" OnClick="btnSave_Click" />&nbsp;
                             <asp:Button runat="server" CausesValidation="false" ID="btnCancel" CssClass="btn btn-default" Text="Cancel" OnClick="btnCancel_Click" />

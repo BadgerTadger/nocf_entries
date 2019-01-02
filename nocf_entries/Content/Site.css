@@ -46,11 +46,23 @@ input[type="select"] {
 }
 
 .rptrTemplate {
-    background-color: slategrey ; color: black;
+    background-color: slategrey;
+    color: black;
 }
 
 .rptrAltTemplate {
-    background-color: lightgray; color: black;
+    background-color: lightgray;
+    color: black;
+}
+
+.rptrLevel2Template {
+    background-color: coral;
+    color: black;
+}
+
+.rptrLevel2AltTemplate {
+    background-color: lightcoral;
+    color: black;
 }
 
 .eventName {
